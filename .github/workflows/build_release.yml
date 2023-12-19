@@ -1,0 +1,43 @@
+name: Build PyPI package
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  release:
+    types: [ published ]
+
+jobs:
+  build-publish-package:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: [ "3.9" ]
+        os: [ ubuntu-latest ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          pipx install poetry==${{ vars.POETRY_VERSION }}
+          pipx inject poetry poetry-dynamic-versioning[plugin]
+        shell: bash
+
+      - name: Poetry path
+        run: echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Build AeroSCOPE
+        run: poetry build
+        shell: bash
+
+      - name: publish AeroSCOPE to PyPI
+        env:
+          TOKEN: ${{ secrets.PYPI }} # do not use the secret directly in run command, it would write it plainly in the log
+        run: |
+          poetry config pypi-token.pypi "$TOKEN"
+          poetry publish
