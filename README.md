@@ -27,7 +27,7 @@ AeroSCOPE can be used in two different ways.
 
 * Simple usage: just using the graphical interface or downloading the final database, no external input is required. This use case is directly addressed to this repository. 
 * Advanced usage: to run all data collection and processing notebooks and to perform more complex analysis on the file. The GUI is an input to this mode (soon). External data inputs that are too large to be stored on git or whose distribution is restricted are required.
-  this mode is described in https://github.com/AeroMAPS/AeroSCOPE_dataset.
+  This mode is described in https://github.com/AeroMAPS/AeroSCOPE_dataset.
 
 Please read the dedicated paper to understand the global data collection and aggregation process.  
 The idea behind the project is to collect all open-source air traffic data to build an extended air traffic route database for a given year, 2019.  
@@ -44,6 +44,9 @@ To run the simple web app designed to explore the data, one can either visit www
 ```bash
 aeroscope run (soon)
 ```
+
+### Advanced usage 
+This mode is described in https://github.com/AeroMAPS/AeroSCOPE_dataset.
 
 __Raw database csv file:__ 
 _**If you simply want to access the compiled database; The last version of the processed database is stored on zenodo under the following doi: [10.5281/zenodo.10143773](). Make sure to download v1.0.1.**_  
