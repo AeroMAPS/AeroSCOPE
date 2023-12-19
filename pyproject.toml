@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "AeroSCOPE"
+version = "0.0.0"
+description = ""
+authors = ["Antoine SALGAS <antoine732@hotmail.fr>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.23"
+pandas = "^1.5"
+matplotlib = "^3.6.2"
+seaborn= "^0.12.2"
+ipython = "^8.8.0"
+plotly = "^5.16.1"
+ipywidgets = "^7.7.2"
+ipyvuetify = "^1.8.10"
+jupyterlab = "^3.6.1"
+voila =  "0.4.0"
+voila-vuetify = "0.6.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+pytest-cov = "^3.0"
+coverage = { extras = ["toml"], version = "^5.5" }
+nbval = "^0.9.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.lint.dependencies]
+black = { version = "21.9b0", extras = ["jupyter"], allow-prereleases = true } # if version is changed, please change it also in .pre-commit-config.yaml file.
+pylint = "*"
+click = "8.0.3"
