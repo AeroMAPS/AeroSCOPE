@@ -836,7 +836,7 @@ class AeroMAPSTab:
                 v.CardText(
                     children=[
                         "Caution: Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions.",
-                        "Comparison between aircraft types performances NOT VALID",
+                        " Comparison between aircraft types performances NOT VALID",
                     ],
                     class_="text-center ma-0 teal--text darken-4",
                     style_="font-size: 16px;",
