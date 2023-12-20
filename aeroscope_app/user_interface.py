@@ -329,14 +329,15 @@ class UserInterface:
             style_="background-color: white; pa-0 ma-0;",  # Set the desired background color and padding here
         )
 
-        # self.opensky_simulator = Simulator(
-        #     use_opensky_data=True,
-        #     class_="mt-9 pa-0",
-        #     # id='inspire',
-        #     style_="background-color: white; pa-0 ma-0;",  # Set the desired background color and padding here
-        # )
+        self.opensky_simulator = Simulator(
+            use_opensky_data=True,
+            class_="mt-9 pa-0",
+            # id='inspire',
+            style_="background-color: white; pa-0 ma-0;",  # Set the desired background color and padding here
+        )
+
         self.output_simulator = Output()
-        #
+
         with self.output_simulator:
             display(self.compiled_simulator)
 
