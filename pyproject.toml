@@ -1,9 +1,20 @@
 [tool.poetry]
-name = "AeroSCOPE"
-version = "0.0.0"
-description = ""
-authors = ["Antoine SALGAS <antoine732@hotmail.fr>"]
+name = "aeroscope"
+version = "0.1.0-beta"
+description = "AeroSCOPE: Exploring Aviation Flows"
 readme = "README.md"
+authors = [
+    "Thomas PLANES <thomas.planes@isae-supaero.fr>",
+    "Scott DELBECQ <scott.delbecq@isae-supaero.fr>",
+    "Antoine SALGAS <antoine.salgas@isae-supaero.fr>",
+]
+keywords = [
+    "air transport",
+    "flight data",
+    "fligh emissions",
+]
+license = "GPL-3.0-only"
+homepage = "https://github.com/AeroMAPS/AeroSCOPE"
 
 [tool.poetry.dependencies]
 python = "^3.8"
