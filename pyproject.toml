@@ -4,9 +4,10 @@ version = "0.1.0-beta"
 description = "AeroSCOPE: Exploring Aviation Flows"
 readme = "README.md"
 authors = [
-    "Thomas PLANES <thomas.planes@isae-supaero.fr>",
-    "Scott DELBECQ <scott.delbecq@isae-supaero.fr>",
     "Antoine SALGAS <antoine.salgas@isae-supaero.fr>",
+    "Junzi SUN <j.sun-1@tudelft.nl>",
+    "Scott DELBECQ <scott.delbecq@isae-supaero.fr>",
+    "Thomas PLANES <thomas.planes@isae-supaero.fr>",
 ]
 keywords = [
     "air transport",
