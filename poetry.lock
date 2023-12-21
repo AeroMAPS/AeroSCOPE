@@ -1085,25 +1085,24 @@ ipyvue = ">=1.7,<2"
 
 [[package]]
 name = "ipywidgets"
-version = "7.8.1"
-description = "IPython HTML widgets for Jupyter"
+version = "8.1.1"
+description = "Jupyter interactive widgets"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "ipywidgets-7.8.1-py2.py3-none-any.whl", hash = "sha256:29f7056d368bf0a7b35d51cf0c56b58582da57c78bb9f765965fef7c332e807c"},
-    {file = "ipywidgets-7.8.1.tar.gz", hash = "sha256:050b87bb9ac11641859af4c36cdb639ca072fb5e121f0f1a401f8a80f9fa008d"},
+    {file = "ipywidgets-8.1.1-py3-none-any.whl", hash = "sha256:2b88d728656aea3bbfd05d32c747cfd0078f9d7e159cf982433b58ad717eed7f"},
+    {file = "ipywidgets-8.1.1.tar.gz", hash = "sha256:40211efb556adec6fa450ccc2a77d59ca44a060f4f9f136833df59c9f538e6e8"},
 ]
 
 [package.dependencies]
 comm = ">=0.1.3"
-ipython = {version = ">=4.0.0", markers = "python_version >= \"3.3\""}
-ipython-genutils = ">=0.2.0,<0.3.0"
-jupyterlab-widgets = {version = ">=1.0.0,<3", markers = "python_version >= \"3.6\""}
+ipython = ">=6.1.0"
+jupyterlab-widgets = ">=3.0.9,<3.1.0"
 traitlets = ">=4.3.1"
-widgetsnbextension = ">=3.6.6,<3.7.0"
+widgetsnbextension = ">=4.0.9,<4.1.0"
 
 [package.extras]
-test = ["ipykernel", "mock", "pytest (>=3.6.0)", "pytest-cov"]
+test = ["ipykernel", "jsonschema", "pytest (>=3.6.0)", "pytest-cov", "pytz"]
 
 [[package]]
 name = "isoduration"
@@ -1343,13 +1342,13 @@ test = ["coverage", "ipykernel", "pre-commit", "pytest (>=7.0)", "pytest-console
 
 [[package]]
 name = "jupyter-server-fileid"
-version = "0.9.0"
-description = ""
+version = "0.9.1"
+description = "Jupyter Server extension providing an implementation of the File ID service."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "jupyter_server_fileid-0.9.0-py3-none-any.whl", hash = "sha256:5b489c6fe6783c41174a728c7b81099608518387e53c3d53451a67f46a0cb7b0"},
-    {file = "jupyter_server_fileid-0.9.0.tar.gz", hash = "sha256:171538b7c7d08d11dbc57d4e6da196e0c258e4c2cd29249ef1e032bb423677f8"},
+    {file = "jupyter_server_fileid-0.9.1-py3-none-any.whl", hash = "sha256:76dd05a45b78c7ec0cba0be98ece289984c6bcfc1ca2da216d42930e506a4d68"},
+    {file = "jupyter_server_fileid-0.9.1.tar.gz", hash = "sha256:7486bca3acf9bbaab7ce5127f9f64d2df58f5d2de377609fb833291a7217a6a2"},
 ]
 
 [package.dependencies]
@@ -1358,7 +1357,7 @@ jupyter-server = ">=1.15,<3"
 
 [package.extras]
 cli = ["click"]
-test = ["jupyter-server[test] (>=1.15,<3)", "pytest", "pytest-cov"]
+test = ["jupyter-server[test] (>=1.15,<3)", "pytest", "pytest-cov", "pytest-jupyter"]
 
 [[package]]
 name = "jupyter-server-ydoc"
@@ -1465,13 +1464,13 @@ test = ["hatch", "ipykernel", "openapi-core (>=0.18.0,<0.19.0)", "openapi-spec-v
 
 [[package]]
 name = "jupyterlab-widgets"
-version = "1.1.7"
-description = "A JupyterLab extension."
+version = "3.0.9"
+description = "Jupyter interactive widgets for JupyterLab"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "jupyterlab_widgets-1.1.7-py3-none-any.whl", hash = "sha256:0c4548cf42032e490447e4180f2c7d49ba5c30b42164992b38fb8c9d56c4e1b2"},
-    {file = "jupyterlab_widgets-1.1.7.tar.gz", hash = "sha256:318dab34267915d658e7b0dc57433ff0ce0d52b3e283986b73b66f7ab9017ae8"},
+    {file = "jupyterlab_widgets-3.0.9-py3-none-any.whl", hash = "sha256:3cf5bdf5b897bf3bccf1c11873aa4afd776d7430200f765e0686bd352487b58d"},
+    {file = "jupyterlab_widgets-3.0.9.tar.gz", hash = "sha256:6005a4e974c7beee84060fdfba341a3218495046de8ae3ec64888e5fe19fdb4c"},
 ]
 
 [[package]]
@@ -3395,17 +3394,14 @@ files = [
 
 [[package]]
 name = "widgetsnbextension"
-version = "3.6.6"
-description = "IPython HTML widgets for Jupyter"
+version = "4.0.9"
+description = "Jupyter interactive widgets for Jupyter Notebook"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "widgetsnbextension-3.6.6-py2.py3-none-any.whl", hash = "sha256:e7fb9999845affc9024ecfbe0a824dd8e633403d027b28ceadab398b633ad51c"},
-    {file = "widgetsnbextension-3.6.6.tar.gz", hash = "sha256:46f4e3cb2d451bbd6141a13696d6ba17c9b5f50645dca9cfd26fe9644d5a00e1"},
+    {file = "widgetsnbextension-4.0.9-py3-none-any.whl", hash = "sha256:91452ca8445beb805792f206e560c1769284267a30ceb1cec9f5bcc887d15175"},
+    {file = "widgetsnbextension-4.0.9.tar.gz", hash = "sha256:3c1f5e46dc1166dfd40a42d685e6a51396fd34ff878742a3e47c6f0cc4a2a385"},
 ]
-
-[package.dependencies]
-notebook = ">=4.4.1"
 
 [[package]]
 name = "y-py"
@@ -3527,4 +3523,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "012ae362870b40c7b4e00da0ffeb3bd182bb05d13d1fdad48a4440d867c6b4f0"
+content-hash = "69931919a8def662f14b8a64d1c5d3109b9e397f3622b6c8f3fd74d0a41c8982"

@@ -44,6 +44,18 @@ title_layout = v.AppBar(
         v.Spacer(),
         v.Btn(
             icon=True,
+            href="https://aeromaps.isae-supaero.fr/",
+            target="_blank",
+            children=[
+                v.Img(
+                    src="./logo/aeromaps.png",
+                    contain=True,
+                    width="28px",
+                ),
+            ],
+        ),
+        v.Btn(
+            icon=True,
             href="https://zenodo.org/records/10143773",
             target="_blank",
             children=[v.Icon(children=["mdi-database"])],
@@ -323,8 +335,9 @@ class UserInterface:
             # id='inspire',
             style_="background-color: white; pa-0 ma-0;",  # Set the desired background color and padding here
         )
+
         self.output_simulator = Output()
-        #
+
         with self.output_simulator:
             display(self.compiled_simulator)
 

@@ -5,8 +5,8 @@
 import ipyvuetify as v
 import ipywidgets
 import pandas as pd
-from ipywidgets import Output, widgets, HTML
-from IPython.display import display, clear_output
+from ipywidgets import Output, widgets
+from IPython.display import display, clear_output, HTML
 from functools import partial
 
 from base64 import b64encode
@@ -140,21 +140,24 @@ class AeroMAPSTab:
             children=["Reset All"], color="light-blue-darken-4", class_="ma-2"
         )
 
-        self.dl_button = ipywidgets.Button(
-            description="Download table", button_style="info"
-        )
+
 
         self.link_with_image = widgets.HTML(
             f'<a href="https://aeromaps.isae-supaero.fr/" target="_blank">'
             f'<img src="logo/aeromaps.png" alt="Logo" style="width: 120px; height: 100px;">'
             "</a>"
         )
-        self.download_output = Output()
-        display(self.download_output)
+
+        self.dl_button = ipywidgets.Button(
+            description="Download table", button_style="info"
+        )
 
         self._render_initial_table(aeroscopedataclass)
         self._make_connections(aeroscopedataclass)
         self._make_layout()
+        self.download_output = Output()
+        display(self.download_output)
+
 
     def _make_connections(self, dataclass):
         self.reset_all_button.on_event(
@@ -819,7 +822,6 @@ class AeroMAPSTab:
         """
         with self.download_output:
             clear_output()
-            print("trig1")
             display(HTML(f"<script>{js_code}</script>"))
 
     def _download_dataframe(self, e=None):
@@ -836,7 +838,7 @@ class AeroMAPSTab:
                 v.CardText(
                     children=[
                         "Caution: Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions.",
-                        "Comparison between aircraft types performances NOT VALID",
+                        " Comparison between aircraft types performances NOT VALID",
                     ],
                     class_="text-center ma-0 teal--text darken-4",
                     style_="font-size: 16px;",
