@@ -25,6 +25,9 @@ pytest-cov = "^3.0"
 coverage = { extras = ["toml"], version = "^5.5" }
 nbval = "^0.9.6"
 
+[tool.poetry.scripts]
+    aeroscope = "aeroscope.app:main"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
