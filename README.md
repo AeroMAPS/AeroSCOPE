@@ -19,7 +19,7 @@ Python 3.10 is recommended, although older versions may work.
 In the new virtual environment, navigate to the project folder. Most installations are done using poetry, except for poetry itself, which can be installed using pip or conda.
 
 ```bash
-pip install aeroscope (soon)
+pip install aeroscope
 ```
 
 ## Usage
@@ -42,7 +42,7 @@ __AeroSCOPE app:__
 To run the simple web app designed to explore the data, one can either visit www.aeromaps.eu/aeroscope (soon) or navigate to the 04_app folder using a terminal and run the app using voila.
 
 ```bash
-aeroscope run (soon)
+aeroscope run
 ```
 
 ### Advanced usage 
