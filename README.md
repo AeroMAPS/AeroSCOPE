@@ -54,5 +54,5 @@ Be sure to replace default NaN (such as 'NA') when reading the csv, to avoid mis
 
 ## Authors
 
-Antoine Salgas, Junzi Sun <br>
+Antoine Salgas, Junzi Sun, Scott Delbecq, Thomas Planès <br>
 Contact: [antoine.salgas@isae-supaero.fr]
