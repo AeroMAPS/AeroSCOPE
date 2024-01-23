@@ -319,6 +319,14 @@ class AeroMAPSTab:
         )
 
     def _table_update(self, dataclass):
+        headers = [
+            {"text": "Metric", "value": "name"},
+            {"text": "Value (Total)", "value": "val"},
+            {"text": "Value (SR)", "value": "sr"},
+            {"text": "Value (MR)", "value": "mr"},
+            {"text": "Value (LR)", "value": "lr"},
+        ]
+
         total_sums = self.in_class_flights_df[["co2", "ask", "seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
@@ -382,6 +390,10 @@ class AeroMAPSTab:
                 "lr": lr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
             },
         ]
+
+        self.df_metrics = pd.DataFrame(items)
+        self.df_metrics.columns = [header["value"] for header in headers]
+
         self.output_1.items = items
 
     def _filter_common_code(self, dataclass):
