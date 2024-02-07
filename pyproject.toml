@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aeroscope"
-version = "0.2.0-beta"
+version = "0.2.1-beta"
 description = "AeroSCOPE: Exploring Aviation Flows"
 readme = "README.md"
 authors = [
