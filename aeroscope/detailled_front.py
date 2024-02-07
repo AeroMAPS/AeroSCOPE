@@ -58,12 +58,12 @@ class DetailledTab:
         )
         # Value watched
         self.value_watched_radio = v.RadioGroup(
-            v_model="co2",  # Set the initial selected value here
+            v_model="CO2 (kg)",  # Set the initial selected value here
             row=True,
             children=[
-                v.Radio(label="CO\u2082 (kg)", value="co2"),
-                v.Radio(label="ASK", value="ask"),
-                v.Radio(label="SEATS", value="seats"),
+                v.Radio(label="CO\u2082 (kg)", value="CO2 (kg)"),
+                v.Radio(label="ASK", value="ASK"),
+                v.Radio(label="SEATS", value="Seats"),
             ],
             class_="mb-3",
         )
@@ -163,13 +163,13 @@ class DetailledTab:
 
         with self.output_2:
             fig_flights_2 = flight_level_plots.distance_histogram_plot_flights(
-                dataclass.flights_df, "co2"
+                dataclass.flights_df, "CO2 (kg)"
             )
             display(fig_flights_2)
 
         with self.output_3:
             fig_flights_3 = flight_level_plots.aircraft_pie_flights(
-                dataclass.flights_df, "co2"
+                dataclass.flights_df, "CO2 (kg)"
             )
             display(fig_flights_3)
 
@@ -443,9 +443,9 @@ class DetailledTab:
                                 "departure_lat": "first",
                                 "arrival_lon": "first",
                                 "arrival_lat": "first",
-                                "co2": "sum",
-                                "ask": "sum",
-                                "seats": "sum",
+                                "CO2 (kg)": "sum",
+                                "ASK": "sum",
+                                "Seats": "sum",
                             }
                         )
                         .reset_index()
@@ -1171,9 +1171,9 @@ class DetailledTab_OS:
                                 "departure_lat": "first",
                                 "arrival_lon": "first",
                                 "arrival_lat": "first",
-                                "co2": "sum",
-                                "ask": "sum",
-                                "seats": "sum",
+                                "CO2 (kg)": "sum",
+                                "ASK": "sum",
+                                "Seats": "sum",
                                 "n_flights": "sum",
                             }
                         )

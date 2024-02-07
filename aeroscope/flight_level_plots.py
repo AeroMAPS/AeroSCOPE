@@ -44,9 +44,9 @@ def flights_map_plot(flights_gpb_df, value_watched_flights):
             flights_gpb_df.groupby("iata_arrival")
             .agg(
                 {
-                    "co2": "sum",
-                    "ask": "sum",
-                    "seats": "sum",
+                    "CO2 (kg)": "sum",
+                    "ASK": "sum",
+                    "Seats": "sum",
                     "n_flights": "sum",
                     "arrival_lon": "first",
                     "arrival_lat": "first",
@@ -59,9 +59,9 @@ def flights_map_plot(flights_gpb_df, value_watched_flights):
             flights_gpb_df.groupby("iata_arrival")
             .agg(
                 {
-                    "co2": "sum",
-                    "ask": "sum",
-                    "seats": "sum",
+                    "CO2 (kg)": "sum",
+                    "ASK": "sum",
+                    "Seats": "sum",
                     "arrival_lon": "first",
                     "arrival_lat": "first",
                 }
@@ -138,9 +138,9 @@ def flights_map_plot_OS(flights_gpb_df, value_watched_flights):
             flights_gpb_df.groupby("dest")
             .agg(
                 {
-                    "co2": "sum",
-                    "ask": "sum",
-                    "seats": "sum",
+                    "CO2 (kg)": "sum",
+                    "ASK": "sum",
+                    "Seats": "sum",
                     "n_flights": "sum",
                     "arrival_lon": "first",
                     "arrival_lat": "first",
@@ -153,9 +153,9 @@ def flights_map_plot_OS(flights_gpb_df, value_watched_flights):
             flights_gpb_df.groupby("iata_arrival")
             .agg(
                 {
-                    "co2": "sum",
-                    "ask": "sum",
-                    "seats": "sum",
+                    "CO2 (kg)": "sum",
+                    "ASK": "sum",
+                    "Seats": "sum",
                     "arrival_lon": "first",
                     "arrival_lat": "first",
                 }
@@ -219,13 +219,13 @@ def flights_treemap_plot(flights_df, value_watched_flights):
         marker=dict(cornerradius=5),
     )
 
-    if value_watched_flights == "co2":
+    if value_watched_flights == "CO2 (kg)":
         fig.update_traces(
             hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (lg)"
         )
-    elif value_watched_flights == "ask":
+    elif value_watched_flights == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
-    elif value_watched_flights == "seats":
+    elif value_watched_flights == "Seats":
         fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2f}")
     elif value_watched_flights == "n_flights":
         fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2f}")
@@ -253,13 +253,13 @@ def flights_treemap_plot_OS(flights_df, value_watched_flights):
         marker=dict(cornerradius=5),
     )
 
-    if value_watched_flights == "co2":
+    if value_watched_flights == "CO2 (kg)":
         fig.update_traces(
             hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (lg)"
         )
-    elif value_watched_flights == "ask":
+    elif value_watched_flights == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
-    elif value_watched_flights == "seats":
+    elif value_watched_flights == "Seats":
         fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2f}")
     elif value_watched_flights == "n_flights":
         fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2f}")
@@ -300,7 +300,7 @@ def distance_cumul_plot_flights(flights_df):
     sns.histplot(
         flights_df,
         x="distance_km",
-        weights="seats",
+        weights="Seats",
         label="Seats",
         element="poly",
         fill=False,
@@ -312,7 +312,7 @@ def distance_cumul_plot_flights(flights_df):
     sns.histplot(
         flights_df,
         x="distance_km",
-        weights="ask",
+        weights="ASK",
         label="ASK",
         element="poly",
         fill=False,
@@ -324,7 +324,7 @@ def distance_cumul_plot_flights(flights_df):
     sns.histplot(
         flights_df,
         x="distance_km",
-        weights="co2",
+        weights="CO2 (kg)",
         label="$\mathregular{CO_2}$",
         element="poly",
         fill=False,
@@ -348,8 +348,8 @@ def distance_cumul_plot_flights_OS(flights_df):
     sns.set_style("darkgrid")
     # Create a new figure with a single subplot
     fig, ax = plt.subplots(figsize=(10, 6.5))
-    # sns.histplot(flights_df, x='distance_km', weights='seats', label='Seats', element='poly',fill=False, cumulative = True, stat='percent', ax=ax,bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),)
-    # sns.histplot(flights_df, x='distance_km', weights='ask', label= 'ASK', element='poly',fill=False, cumulative = True, stat='percent',ax=ax,bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),)
+    # sns.histplot(flights_df, x='distance_km', weights='Seats', label='Seats', element='poly',fill=False, cumulative = True, stat='percent', ax=ax,bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),)
+    # sns.histplot(flights_df, x='distance_km', weights='ASK', label= 'ASK', element='poly',fill=False, cumulative = True, stat='percent',ax=ax,bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),)
     sns.histplot(
         flights_df,
         x="distance_km",

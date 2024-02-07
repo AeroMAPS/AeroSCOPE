@@ -109,9 +109,9 @@ def countries_map_plot(country_flows, value_watched_ctry):
 #     sns.set_style("darkgrid")
 #     # Create a new figure with a single subplot
 #     fig, ax = plt.subplots(figsize=(5,5))
-#     sns.ecdfplot(flights_df, x='distance_km', weights='seats', label='Seats',stat='percent', ax=ax)
-#     sns.ecdfplot(flights_df, x='distance_km', weights='ask', label= 'ASK', stat='percent',ax=ax)
-#     sns.ecdfplot(flights_df, x='distance_km', weights='co2', label= '$\mathregular{CO_2}$',stat='percent', ax=ax)
+#     sns.ecdfplot(flights_df, x='distance_km', weights='Seats', label='Seats',stat='percent', ax=ax)
+#     sns.ecdfplot(flights_df, x='distance_km', weights='ASK', label= 'ASK', stat='percent',ax=ax)
+#     sns.ecdfplot(flights_df, x='distance_km', weights='CO2 (kg)', label= '$\mathregular{CO_2}$',stat='percent', ax=ax)
 
 #     ax.legend()
 
@@ -135,7 +135,7 @@ def distance_cumul_plot_country(flights_df):
     sns.histplot(
         flights_df,
         x="distance_km",
-        weights="seats",
+        weights="Seats",
         label="Seats",
         element="poly",
         fill=False,
@@ -147,7 +147,7 @@ def distance_cumul_plot_country(flights_df):
     sns.histplot(
         flights_df,
         x="distance_km",
-        weights="ask",
+        weights="ASK",
         label="ASK",
         element="poly",
         fill=False,
@@ -159,7 +159,7 @@ def distance_cumul_plot_country(flights_df):
     sns.histplot(
         flights_df,
         x="distance_km",
-        weights="co2",
+        weights="CO2 (kg)",
         label="$\mathregular{CO_2}$",
         element="poly",
         fill=False,
@@ -316,13 +316,13 @@ def countries_treemap_plot(country_flows, value_watched_ctry):
         marker=dict(cornerradius=5),
     )
 
-    if value_watched_ctry == "co2":
+    if value_watched_ctry == "CO2 (kg)":
         fig.update_traces(
             hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (lg)"
         )
-    elif value_watched_ctry == "ask":
+    elif value_watched_ctry == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
-    elif value_watched_ctry == "seats":
+    elif value_watched_ctry == "Seats":
         fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2f}")
     elif value_watched_ctry == "n_flights":
         fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2f}")
@@ -358,11 +358,11 @@ def countries_treemap_plot(country_flows, value_watched_ctry):
 #         margin=dict(l=5, r=5, t=60, b=5),
 #     )
 
-#     if value_watched_ctry == 'co2':
+#     if value_watched_ctry == 'CO2 (kg)':
 #         fig.update_traces(hovertemplate='Distance group (km)=%{x}<br>CO2 (kg)=%{y:.0f}<extra></extra>')
-#     elif value_watched_ctry == 'ask':
+#     elif value_watched_ctry == 'ASK':
 #         fig.update_traces(hovertemplate='Distance group (km)=%{x}<br>ASK=%{y:.0f}<extra></extra>')
-#     elif value_watched_ctry == 'seats':
+#     elif value_watched_ctry == 'Seats':
 #         fig.update_traces(hovertemplate='Distance group (km)=%{x}<br>Seats=%{y:.0f}<extra></extra>')
 #     return fig
 

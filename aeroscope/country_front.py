@@ -34,12 +34,12 @@ class CountriesTab:
 
         if aeroscopedataclass.type == "compilation":
             self.value_watched_radio = v.RadioGroup(
-                v_model="co2",  # Set the initial selected value here
+                v_model="CO2 (kg)",  # Set the initial selected value here
                 row=True,
                 children=[
-                    v.Radio(label="CO\u2082 (kg)", value="co2"),
-                    v.Radio(label="ASK", value="ask"),
-                    v.Radio(label="SEATS", value="seats"),
+                    v.Radio(label="CO\u2082 (kg)", value="CO2 (kg)"),
+                    v.Radio(label="ASK", value="ASK"),
+                    v.Radio(label="SEATS", value="Seats"),
                 ],
                 class_="mb-3",
             )
@@ -131,7 +131,7 @@ class CountriesTab:
 
     def _render_initial_plots(self, dataclass):
         if dataclass.type == "compilation":
-            init_value = "co2"
+            init_value = "CO2 (kg)"
         else:  # OPENSKY
             init_value = "n_flights"
         with self.output_1:

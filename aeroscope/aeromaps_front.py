@@ -244,67 +244,67 @@ class AeroMAPSTab:
             {"text": "Value (LR)", "value": "lr"},
         ]
 
-        total_sums = self.in_class_flights_df[["co2", "ask", "seats"]].sum()
+        total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
-        ][["co2", "ask", "seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & (self.in_class_flights_df.distance_km <= 4000)
-        ][["co2", "ask", "seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
-            ["co2", "ask", "seats"]
+            ["CO2 (kg)", "ASK", "Seats"]
         ].sum()
 
         items = [
             {
                 "name": "ASK",
-                "val": total_sums["ask"],
-                "sr": sr_sums["ask"],
-                "mr": mr_sums["ask"],
-                "lr": lr_sums["ask"],
+                "val": total_sums["ASK"],
+                "sr": sr_sums["ASK"],
+                "mr": mr_sums["ASK"],
+                "lr": lr_sums["ASK"],
             },
             {
                 "name": "CO2 (kg)",
-                "val": total_sums["co2"],
-                "sr": sr_sums["co2"],
-                "mr": mr_sums["co2"],
-                "lr": lr_sums["co2"],
+                "val": total_sums["CO2 (kg)"],
+                "sr": sr_sums["CO2 (kg)"],
+                "mr": mr_sums["CO2 (kg)"],
+                "lr": lr_sums["CO2 (kg)"],
             },
             {
                 "name": "Seats",
-                "val": total_sums["seats"],
-                "sr": sr_sums["seats"],
-                "mr": mr_sums["seats"],
-                "lr": lr_sums["seats"],
+                "val": total_sums["Seats"],
+                "sr": sr_sums["Seats"],
+                "mr": mr_sums["Seats"],
+                "lr": lr_sums["Seats"],
             },
             {
-                "name": "CO2 per ask",
-                "val": total_sums["co2"] / total_sums["ask"],
-                "sr": sr_sums["co2"] / sr_sums["ask"],
-                "mr": mr_sums["co2"] / mr_sums["ask"],
-                "lr": lr_sums["co2"] / lr_sums["ask"],
+                "name": "CO2 per ASK",
+                "val": total_sums["CO2 (kg)"] / total_sums["ASK"],
+                "sr": sr_sums["CO2 (kg)"] / sr_sums["ASK"],
+                "mr": mr_sums["CO2 (kg)"] / mr_sums["ASK"],
+                "lr": lr_sums["CO2 (kg)"] / lr_sums["ASK"],
             },
             {
                 "name": "Share of world ASK (%)",
-                "val": total_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
-                "sr": sr_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
-                "mr": mr_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
-                "lr": lr_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
+                "val": total_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
+                "sr": sr_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
+                "mr": mr_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
+                "lr": lr_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
             },
             {
                 "name": "Share of world Seats (%)",
-                "val": total_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
-                "sr": sr_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
-                "mr": mr_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
-                "lr": lr_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
+                "val": total_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
+                "sr": sr_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
+                "mr": mr_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
+                "lr": lr_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
             },
             {
                 "name": "Share of world CO2 (%)",
-                "val": total_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
-                "sr": sr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
-                "mr": mr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
-                "lr": lr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
+                "val": total_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "sr": sr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "mr": mr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "lr": lr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
             },
         ]
 
@@ -327,67 +327,67 @@ class AeroMAPSTab:
             {"text": "Value (LR)", "value": "lr"},
         ]
 
-        total_sums = self.in_class_flights_df[["co2", "ask", "seats"]].sum()
+        total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
-        ][["co2", "ask", "seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & ((self.in_class_flights_df.distance_km <= 4000))
-        ][["co2", "ask", "seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
-            ["co2", "ask", "seats"]
+            ["CO2 (kg)", "ASK", "Seats"]
         ].sum()
 
         items = [
             {
                 "name": "ASK",
-                "val": total_sums["ask"],
-                "sr": sr_sums["ask"],
-                "mr": mr_sums["ask"],
-                "lr": lr_sums["ask"],
+                "val": total_sums["ASK"],
+                "sr": sr_sums["ASK"],
+                "mr": mr_sums["ASK"],
+                "lr": lr_sums["ASK"],
             },
             {
                 "name": "CO2 (kg)",
-                "val": total_sums["co2"],
-                "sr": sr_sums["co2"],
-                "mr": mr_sums["co2"],
-                "lr": lr_sums["co2"],
+                "val": total_sums["CO2 (kg)"],
+                "sr": sr_sums["CO2 (kg)"],
+                "mr": mr_sums["CO2 (kg)"],
+                "lr": lr_sums["CO2 (kg)"],
             },
             {
                 "name": "Seats",
-                "val": total_sums["seats"],
-                "sr": sr_sums["seats"],
-                "mr": mr_sums["seats"],
-                "lr": lr_sums["seats"],
+                "val": total_sums["Seats"],
+                "sr": sr_sums["Seats"],
+                "mr": mr_sums["Seats"],
+                "lr": lr_sums["Seats"],
             },
             {
-                "name": "CO2 per ask",
-                "val": total_sums["co2"] / total_sums["ask"],
-                "sr": sr_sums["co2"] / sr_sums["ask"],
-                "mr": mr_sums["co2"] / mr_sums["ask"],
-                "lr": lr_sums["co2"] / lr_sums["ask"],
+                "name": "CO2 per ASK",
+                "val": total_sums["CO2 (kg)"] / total_sums["ASK"],
+                "sr": sr_sums["CO2 (kg)"] / sr_sums["ASK"],
+                "mr": mr_sums["CO2 (kg)"] / mr_sums["ASK"],
+                "lr": lr_sums["CO2 (kg)"] / lr_sums["ASK"],
             },
             {
                 "name": "Share of world ASK (%)",
-                "val": total_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
-                "sr": sr_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
-                "mr": mr_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
-                "lr": lr_sums["ask"] / dataclass.flights_df.ask.sum() * 100,
+                "val": total_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
+                "sr": sr_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
+                "mr": mr_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
+                "lr": lr_sums["ASK"] / dataclass.flights_df.ASK.sum() * 100,
             },
             {
                 "name": "Share of world Seats (%)",
-                "val": total_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
-                "sr": sr_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
-                "mr": mr_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
-                "lr": lr_sums["seats"] / dataclass.flights_df.seats.sum() * 100,
+                "val": total_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
+                "sr": sr_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
+                "mr": mr_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
+                "lr": lr_sums["Seats"] / dataclass.flights_df.Seats.sum() * 100,
             },
             {
                 "name": "Share of world CO2 (%)",
-                "val": total_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
-                "sr": sr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
-                "mr": mr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
-                "lr": lr_sums["co2"] / dataclass.flights_df.co2.sum() * 100,
+                "val": total_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "sr": sr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "mr": mr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "lr": lr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
             },
         ]
 
