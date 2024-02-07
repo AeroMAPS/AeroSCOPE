@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.2.1-beta
+
+Changed:
+- Font case modified on metric names
+- Disclamer layout
+
+Fixed:
+- Data export (issue #10)
+
+
 ## Version 0.2.0-beta
 
 Changed:
