@@ -78,7 +78,7 @@ footer_layout = v.Footer(
             class_="text-center mt-4",
             children=[
                 f"{datetime.now().year} — ",
-                v.Html(tag="strong", children=["©ISAE-SUPAERO & TU-DELFT"]),
+                v.Html(tag="strong", children=["©ISAE-SUPAERO & TU Delft"]),
             ],
         )
     ],
