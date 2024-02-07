@@ -58,7 +58,7 @@ def pax_map_plot(flights_gpb_df):
             + "%{customdata}<br>"
             + "CO2 Ppax"
             + ": %{text:.0f}"
-            + "(kg)<br>"
+            + " (kg)<br>"
             + "<extra></extra>",
         )
     )
