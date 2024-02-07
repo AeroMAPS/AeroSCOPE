@@ -134,7 +134,7 @@ class ContinentalTab:
                             children=[
                                 v.CardText(
                                     children=[
-                                        v.CardTitle(children="Indicator"),
+                                        v.CardTitle(children="Indicator (2019 values)"),
                                         self.value_watched_radio,
                                     ]
                                 ),

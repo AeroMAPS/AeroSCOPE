@@ -849,9 +849,25 @@ class AeroMAPSTab:
             children=[
                 v.CardText(
                     children=[
-                        "Caution: Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions.",
-                        " Comparison between aircraft types performances NOT VALID",
+                        v.Html(tag="div", children=[
+                            v.Html(tag="p", class_="text-center ma-0", children=[
+                                "DISCLAIMER"
+                            ]),
+                            v.Html(tag="p", class_="text-center ma-0", children=[
+                                "Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions. ",
+                            ]),
+                            v.Html(tag="p", class_="text-center ma-0", children=[
+                                "Comparison between aircraft types performances NOT VALID. ",
+                            ]),
+                            v.Html(tag="p", class_="text-center ma-0", children=[
+                                "See zenodo.org/records/10143773 for more details."
+                            ]),
+                            v.Html(tag="p", class_="text-center ma-0", children=[
+                                "All the metrics are for 2019."
+                            ]),
+                        ]),
                     ],
+
                     class_="text-center ma-0 teal--text darken-4",
                     style_="font-size: 16px;",
                 ),

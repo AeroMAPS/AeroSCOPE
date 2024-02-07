@@ -538,9 +538,23 @@ class DetailledTab:
                     children=[
                         v.CardText(
                             children=[
-                                "Caution: Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions."
+                                v.Html(tag="div", children=[
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "DISCLAIMER"
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions. ",
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "See zenodo.org/records/10143773 for more details."
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "All the metrics are for 2019."
+                                    ]),
+                                ]),
                             ],
-                            class_="text-center teal--text darken-4",
+
+                            class_="text-center ma-0 teal--text darken-4",
                             style_="font-size: 16px;",
                         ),
                     ],
@@ -564,7 +578,7 @@ class DetailledTab:
                             children=[
                                 v.CardText(
                                     children=[
-                                        v.CardTitle(children="Indicator"),
+                                        v.CardTitle(children="Indicator (2019 values)"),
                                         self.value_watched_radio,
                                     ]
                                 ),
@@ -1253,9 +1267,26 @@ class DetailledTab_OS:
                     children=[
                         v.CardText(
                             children=[
-                                "Caution: Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions."
+                                v.Html(tag="div", children=[
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "DISCLAIMER"
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions. ",
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "Only OpenSky Data is used, hence a very unequal geographic coverage. Use 'Compilation' mode for global coverage.",
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "See zenodo.org/records/10143773 for more details."
+                                    ]),
+                                    v.Html(tag="p", class_="text-center ma-0", children=[
+                                        "All the metrics are for 2019."
+                                    ]),
+                                ]),
                             ],
-                            class_="text-center teal--text darken-4",
+
+                            class_="text-center ma-0 teal--text darken-4",
                             style_="font-size: 16px;",
                         ),
                     ],
@@ -1279,7 +1310,7 @@ class DetailledTab_OS:
                             children=[
                                 v.CardText(
                                     children=[
-                                        v.CardTitle(children="Indicator"),
+                                        v.CardTitle(children="Indicator (2019 values)"),
                                         self.value_watched_radio,
                                     ]
                                 ),

@@ -27,7 +27,7 @@ source_radio = v.RadioGroup(
     row=True,
     children=[
         v.Radio(label="Compilation", value="compilation", mandatory=True),
-        v.Radio(label="OpenSky", value="opensky"),
+        v.Radio(label="OpenSky (partial coverage)", value="opensky"),
     ],
 )
 
