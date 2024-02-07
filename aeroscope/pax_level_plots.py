@@ -57,8 +57,8 @@ def pax_map_plot(flights_gpb_df):
             hovertemplate="Flights to: "
             + "%{customdata}<br>"
             + "CO2 Ppax"
-            + ": %{text:.0f}<br>"
-            + "(kg)"
+            + ": %{text:.0f}"
+            + "(kg)<br>"
             + "<extra></extra>",
         )
     )
