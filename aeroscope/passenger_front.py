@@ -70,7 +70,7 @@ class PassengerTab:
                             "arrival_lon": "first",
                             "arrival_lat": "first",
                             "CO2 Ppax": "mean",
-                            "seats": "sum",
+                            "Seats": "sum",
                         }
                     )
                     .reset_index()
@@ -78,7 +78,7 @@ class PassengerTab:
 
                 # Remove flights if not enough seats for this mode (avoid exotic routes)
                 flights_df_od = flights_df_od[
-                    flights_df_od["seats"] > 20000
+                    flights_df_od["Seats"] > 20000
                 ].reset_index()
                 # Apply the function to the DataFrame column
                 flights_df_od["airline_iata"] = flights_df_od["airline_iata"].apply(
