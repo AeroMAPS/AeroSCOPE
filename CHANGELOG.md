@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.2.2-beta
+
+Fixed:
+- Minor display error (PR #12)
+
 ## Version 0.2.1-beta
 
 Changed:
