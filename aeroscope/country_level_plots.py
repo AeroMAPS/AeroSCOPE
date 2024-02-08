@@ -318,7 +318,7 @@ def countries_treemap_plot(country_flows, value_watched_ctry):
 
     if value_watched_ctry == "CO2 (kg)":
         fig.update_traces(
-            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (lg)"
+            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)"
         )
     elif value_watched_ctry == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")

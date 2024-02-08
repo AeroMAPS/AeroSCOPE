@@ -57,14 +57,15 @@ def pax_map_plot(flights_gpb_df):
             hovertemplate="Flights to: "
             + "%{customdata}<br>"
             + "CO2 Ppax"
-            + ": %{text:.0f}<br>"
+            + ": %{text:.0f}"
+            + " (kg)<br>"
             + "<extra></extra>",
         )
     )
 
     fig.update_geos(showcountries=True)
     fig.update_layout(
-        showlegend=False, height=800, title="Route values for {}".format("CO2 Ppax")
+        showlegend=False, height=800, title="Route values for {}".format("CO2 Ppax (kg)")
     )
     fig.update_layout(
         margin=dict(l=5, r=5, t=60, b=5)

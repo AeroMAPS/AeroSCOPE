@@ -221,7 +221,7 @@ def flights_treemap_plot(flights_df, value_watched_flights):
 
     if value_watched_flights == "CO2 (kg)":
         fig.update_traces(
-            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (lg)"
+            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)"
         )
     elif value_watched_flights == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
@@ -255,7 +255,7 @@ def flights_treemap_plot_OS(flights_df, value_watched_flights):
 
     if value_watched_flights == "CO2 (kg)":
         fig.update_traces(
-            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (lg)"
+            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)"
         )
     elif value_watched_flights == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
