@@ -279,11 +279,18 @@ class AeroMAPSTab:
                 "lr": lr_sums["Seats"],
             },
             {
-                "name": "CO2 per ASK",
+                "name": "CO2 (kg) per ASK",
                 "val": total_sums["CO2 (kg)"] / total_sums["ASK"],
                 "sr": sr_sums["CO2 (kg)"] / sr_sums["ASK"],
                 "mr": mr_sums["CO2 (kg)"] / mr_sums["ASK"],
                 "lr": lr_sums["CO2 (kg)"] / lr_sums["ASK"],
+            },
+            {
+                "name": "Energy (MJ) per ASK",
+                "val": total_sums["CO2 (kg)"] / total_sums["ASK"] / 3.16 *43,
+                "sr": sr_sums["CO2 (kg)"] / sr_sums["ASK"] / 3.16 * 43,
+                "mr": mr_sums["CO2 (kg)"] / mr_sums["ASK"] / 3.16 * 43,
+                "lr": lr_sums["CO2 (kg)"] / lr_sums["ASK"] / 3.16 * 43,
             },
             {
                 "name": "Share of world ASK (%)",
@@ -362,11 +369,18 @@ class AeroMAPSTab:
                 "lr": lr_sums["Seats"],
             },
             {
-                "name": "CO2 per ASK",
+                "name": "CO2 (kg) per ASK",
                 "val": total_sums["CO2 (kg)"] / total_sums["ASK"],
                 "sr": sr_sums["CO2 (kg)"] / sr_sums["ASK"],
                 "mr": mr_sums["CO2 (kg)"] / mr_sums["ASK"],
                 "lr": lr_sums["CO2 (kg)"] / lr_sums["ASK"],
+            },
+            {
+                "name": "Energy (MJ) per ASK",
+                "val": total_sums["CO2 (kg)"] / total_sums["ASK"] / 3.16 * 43,
+                "sr": sr_sums["CO2 (kg)"] / sr_sums["ASK"] / 3.16 * 43,
+                "mr": mr_sums["CO2 (kg)"] / mr_sums["ASK"] / 3.16 * 43,
+                "lr": lr_sums["CO2 (kg)"] / lr_sums["ASK"] / 3.16 * 43,
             },
             {
                 "name": "Share of world ASK (%)",
