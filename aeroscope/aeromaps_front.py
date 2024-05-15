@@ -942,7 +942,6 @@ class AeroMAPSTab:
             self.in_class_flights_df.iata_departure.unique().tolist()
         )
         if len(self.departure_country_autocomplete.v_model) == 0:
-            print(self.in_class_flights_df.departure_country_name.unique().tolist())
             self.departure_country_autocomplete.items = (
                     self.in_class_flights_df.departure_country_name.unique().tolist()
             )
