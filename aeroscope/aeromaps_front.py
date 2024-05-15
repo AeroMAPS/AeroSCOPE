@@ -204,6 +204,11 @@ class AeroMAPSTab:
         self.departure_country_autocomplete.observe(
             partial(self._df_update_dep_ctry, dataclass=dataclass), names="v_model"
         )
+
+        self.departure_organisation_autocomplete.observe(
+            partial(self._df_update_orga, dataclass=dataclass), names="v_model"
+        )
+
         self.departure_continent_autocomplete.observe(
             partial(self._df_update_dep_conti, dataclass=dataclass), names="v_model"
         )
@@ -213,6 +218,11 @@ class AeroMAPSTab:
         self.arrival_country_autocomplete.observe(
             partial(self._df_update_arr_ctry, dataclass=dataclass), names="v_model"
         )
+
+        self.arrival_organisation_autocomplete.observe(
+            partial(self._df_update_orga, dataclass=dataclass), names="v_model"
+        )
+
         self.arrival_continent_autocomplete.observe(
             partial(self._df_update_arr_conti, dataclass=dataclass), names="v_model"
         )
@@ -388,7 +398,10 @@ class AeroMAPSTab:
                 "South Africa, Republic of"
             ])
 
+
         self.departure_country_autocomplete.v_model = list(set(regional_list))
+        self.departure_country_autocomplete.items = list(set(regional_list))
+
 
     def _select_regional_arrival(self, change):
         selected_organisations = self.arrival_organisation_autocomplete.v_model
@@ -551,7 +564,10 @@ class AeroMAPSTab:
                 "South Africa, Republic of"
             ])
 
-        self.arrival_country_autocomplete.v_model = list(set(regional_list))
+        self.arrival_country_autocomplete.v_model = list(
+            set(regional_list))
+        self.arrival_country_autocomplete.items = list(
+            set(regional_list))
 
     def _reset_all(self, widget, event, data, dataclass):
         self.departure_airport_autocomplete.v_model = list()
@@ -919,17 +935,52 @@ class AeroMAPSTab:
         )
 
     def _df_update_dep_ctry(self, change, dataclass):
+
         self._filter_common_code(dataclass=dataclass)
 
         self.departure_airport_autocomplete.items = (
             self.in_class_flights_df.iata_departure.unique().tolist()
         )
         if len(self.departure_country_autocomplete.v_model) == 0:
+            print(self.in_class_flights_df.departure_country_name.unique().tolist())
             self.departure_country_autocomplete.items = (
                     self.in_class_flights_df.departure_country_name.unique().tolist()
             )
             self.departure_organisation_autocomplete.v_model = list()
 
+
+        self.departure_continent_autocomplete.items = (
+            self.in_class_flights_df.departure_continent_name.unique().tolist()
+        )
+        self.arrival_airport_autocomplete.items = (
+            self.in_class_flights_df.iata_arrival.unique().tolist()
+        )
+        self.arrival_country_autocomplete.items = (
+            self.in_class_flights_df.arrival_country_name.unique().tolist()
+        )
+        self.arrival_continent_autocomplete.items = (
+            self.in_class_flights_df.arrival_continent_name.unique().tolist()
+        )
+        self.domestic_autocomplete.items = (
+            self.in_class_flights_df.domestic.unique().tolist()
+        )
+        self.airline_autocomplete.items = (
+            self.in_class_flights_df.airline_iata.unique().tolist()
+        )
+        self.aircraft_autocomplete.items = (
+            self.in_class_flights_df.acft_icao.unique().tolist()
+        )
+
+    def _df_update_orga(self, change, dataclass):
+        self._filter_common_code(dataclass=dataclass)
+
+        self.departure_airport_autocomplete.items = (
+            self.in_class_flights_df.iata_departure.unique().tolist()
+        )
+
+        self.departure_country_autocomplete.items = (
+                    self.in_class_flights_df.departure_country_name.unique().tolist()
+            )
 
         self.departure_continent_autocomplete.items = (
             self.in_class_flights_df.departure_continent_name.unique().tolist()
