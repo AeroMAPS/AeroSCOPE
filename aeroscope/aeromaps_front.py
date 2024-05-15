@@ -87,6 +87,32 @@ class AeroMAPSTab:
             variant="outlined",
         )
 
+        ############# International Organisation Filter #############
+
+        self.departure_organisation_autocomplete = v.Autocomplete(
+            v_model=[],
+            clearable=True,
+            chips=True,
+            label="International Organisation",
+            items=["European Union", "OECD", 'G7',
+                   'G20', 'Eurocontrol Members',
+                   'BRICS'],
+            multiple=True,
+            variant="outlined",
+        )
+
+        self.arrival_organisation_autocomplete = v.Autocomplete(
+            v_model=[],
+            clearable=True,
+            chips=True,
+            label="International Organisation",
+            items=["European Union", "OECD", 'G7',
+                   'G20', 'Eurocontrol Members',
+                   'BRICS'],
+            multiple=True,
+            variant="outlined",
+        )
+
         ############# Continent filter #############
 
         self.departure_continent_autocomplete = v.Autocomplete(
@@ -140,8 +166,6 @@ class AeroMAPSTab:
             children=["Reset All"], color="light-blue-darken-4", class_="ma-2"
         )
 
-
-
         self.link_with_image = widgets.HTML(
             f'<a href="https://aeromaps.isae-supaero.fr/" target="_blank">'
             f'<img src="logo/aeromaps.png" alt="Logo" style="width: 120px; height: 100px;">'
@@ -158,10 +182,17 @@ class AeroMAPSTab:
         self.download_output = Output()
         display(self.download_output)
 
-
     def _make_connections(self, dataclass):
         self.reset_all_button.on_event(
             "click", partial(self._reset_all, dataclass=dataclass)
+        )
+
+        self.departure_organisation_autocomplete.observe(
+            self._select_regional_departure, names="v_model"
+        )
+
+        self.arrival_organisation_autocomplete.observe(
+            self._select_regional_arrival, names="v_model"
         )
 
         self.range_slider.observe(
@@ -196,12 +227,340 @@ class AeroMAPSTab:
         )
         self.dl_button.on_click(self._download_dataframe)
 
+    def _select_regional_departure(self, change):
+        selected_organisations = self.departure_organisation_autocomplete.v_model
+
+        regional_list = []
+        if "European Union" in selected_organisations:
+            regional_list.extend([
+                "Austria, Republic of",
+                "Belgium, Kingdom of",
+                "Bulgaria, Republic of",
+                "Croatia, Republic of",
+                "Cyprus, Republic of",
+                "Czech Republic",
+                "Denmark, Kingdom of",
+                "Estonia, Republic of",
+                "Finland, Republic of",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "Greece, Hellenic Republic",
+                "Hungary, Republic of",
+                "Ireland",
+                "Italy, Italian Republic",
+                "Latvia, Republic of",
+                "Lithuania, Republic of",
+                "Luxembourg, Grand Duchy of",
+                "Malta, Republic of",
+                "Netherlands, Kingdom of the",
+                "Poland, Republic of",
+                "Portugal, Portuguese Republic",
+                "Romania",
+                "Slovakia (Slovak Republic)",
+                "Slovenia, Republic of",
+                "Spain, Kingdom of",
+                "Sweden, Kingdom of"
+            ])
+        if "G7" in selected_organisations:
+            regional_list.extend([
+                "Canada",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "Italy, Italian Republic",
+                "Japan",
+                "United Kingdom of Great Britain & Northern Ireland",
+                "United States of America"
+            ])
+        if "G20" in selected_organisations:
+            regional_list.extend([
+                "Argentina, Argentine Republic",
+                "Australia, Commonwealth of",
+                "Brazil, Federative Republic of",
+                "Canada",
+                "China, People's Republic of",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "India, Republic of",
+                "Indonesia, Republic of",
+                "Italy, Italian Republic",
+                "Japan",
+                "Mexico, United Mexican States",
+                "Russian Federation",
+                "Saudi Arabia, Kingdom of",
+                "South Africa, Republic of",
+                "Republic of Korea",
+                "Turkey, Republic of",
+                "United Kingdom of Great Britain & Northern Ireland",
+                "United States of America"
+            ])
+        if "OECD" in selected_organisations:
+            regional_list.extend([
+                "Australia, Commonwealth of",
+                "Austria, Republic of",
+                "Belgium, Kingdom of",
+                "Canada",
+                "Chile, Republic of",
+                "Colombia, Republic of",
+                "Czech Republic",
+                "Denmark, Kingdom of",
+                "Estonia, Republic of",
+                "Finland, Republic of",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "Greece, Hellenic Republic",
+                "Hungary, Republic of",
+                "Iceland, Republic of",
+                "Ireland",
+                "Israel, State of",
+                "Italy, Italian Republic",
+                "Japan",
+                "Korea, Republic of",
+                "Latvia, Republic of",
+                "Lithuania, Republic of",
+                "Luxembourg, Grand Duchy of",
+                "Mexico, United Mexican States",
+                "Netherlands, Kingdom of the",
+                "New Zealand",
+                "Norway, Kingdom of",
+                "Poland, Republic of",
+                "Portugal, Portuguese Republic",
+                "Slovakia (Slovak Republic)",
+                "Slovenia, Republic of",
+                "Spain, Kingdom of",
+                "Sweden, Kingdom of",
+                "Switzerland, Swiss Confederation",
+                "Turkey, Republic of",
+                "United Kingdom of Great Britain & Northern Ireland",
+                "United States of America"
+            ])
+        if "Eurocontrol Members" in selected_organisations:
+            regional_list.extend([
+                "Albania, Republic of",
+                "Armenia, Republic of",
+                "Austria, Republic of",
+                "Azerbaijan, Republic of",
+                "Belgium, Kingdom of",
+                "Bosnia and Herzegovina",
+                "Bulgaria, Republic of",
+                "Croatia, Republic of",
+                "Cyprus, Republic of",
+                "Czech Republic",
+                "Denmark, Kingdom of",
+                "Estonia, Republic of",
+                "Finland, Republic of",
+                "France, French Republic",
+                "Georgia",
+                "Germany, Federal Republic of",
+                "Greece, Hellenic Republic",
+                "Hungary, Republic of",
+                "Iceland, Republic of",
+                "Ireland",
+                "Italy, Italian Republic",
+                "Latvia, Republic of",
+                "Lithuania, Republic of",
+                "Luxembourg, Grand Duchy of",
+                "Malta, Republic of",
+                "Moldova, Republic of",
+                "Monaco, Principality of",
+                "Montenegro, Republic of",
+                "Netherlands, Kingdom of the",
+                "North Macedonia, Republic of",
+                "Norway, Kingdom of",
+                "Poland, Republic of",
+                "Portugal, Portuguese Republic",
+                "Romania",
+                "Serbia, Republic of",
+                "Slovakia (Slovak Republic)",
+                "Slovenia, Republic of",
+                "Spain, Kingdom of",
+                "Sweden, Kingdom of",
+                "Switzerland, Swiss Confederation",
+                "Turkey, Republic of",
+                "Ukraine",
+                "United Kingdom of Great Britain & Northern Ireland"
+            ])
+        if "BRICS" in selected_organisations:
+            regional_list.extend([
+                "Brazil, Federative Republic of",
+                "Russian Federation",
+                "India, Republic of",
+                "China, People's Republic of",
+                "South Africa, Republic of"
+            ])
+
+        self.departure_country_autocomplete.v_model = list(set(regional_list))
+
+    def _select_regional_arrival(self, change):
+        selected_organisations = self.arrival_organisation_autocomplete.v_model
+
+        regional_list = []
+        if "European Union" in selected_organisations:
+            regional_list.extend([
+                "Austria, Republic of",
+                "Belgium, Kingdom of",
+                "Bulgaria, Republic of",
+                "Croatia, Republic of",
+                "Cyprus, Republic of",
+                "Czech Republic",
+                "Denmark, Kingdom of",
+                "Estonia, Republic of",
+                "Finland, Republic of",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "Greece, Hellenic Republic",
+                "Hungary, Republic of",
+                "Ireland",
+                "Italy, Italian Republic",
+                "Latvia, Republic of",
+                "Lithuania, Republic of",
+                "Luxembourg, Grand Duchy of",
+                "Malta, Republic of",
+                "Netherlands, Kingdom of the",
+                "Poland, Republic of",
+                "Portugal, Portuguese Republic",
+                "Romania",
+                "Slovakia (Slovak Republic)",
+                "Slovenia, Republic of",
+                "Spain, Kingdom of",
+                "Sweden, Kingdom of"
+            ])
+        if "G7" in selected_organisations:
+            regional_list.extend([
+                "Canada",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "Italy, Italian Republic",
+                "Japan",
+                "United Kingdom of Great Britain & Northern Ireland",
+                "United States of America"
+            ])
+        if "G20" in selected_organisations:
+            regional_list.extend([
+                "Argentina, Argentine Republic",
+                "Australia, Commonwealth of",
+                "Brazil, Federative Republic of",
+                "Canada",
+                "China, People's Republic of",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "India, Republic of",
+                "Indonesia, Republic of",
+                "Italy, Italian Republic",
+                "Japan",
+                "Mexico, United Mexican States",
+                "Russian Federation",
+                "Saudi Arabia, Kingdom of",
+                "South Africa, Republic of",
+                "Republic of Korea",
+                "Turkey, Republic of",
+                "United Kingdom of Great Britain & Northern Ireland",
+                "United States of America"
+            ])
+        if "OECD" in selected_organisations:
+            regional_list.extend([
+                "Australia, Commonwealth of",
+                "Austria, Republic of",
+                "Belgium, Kingdom of",
+                "Canada",
+                "Chile, Republic of",
+                "Colombia, Republic of",
+                "Czech Republic",
+                "Denmark, Kingdom of",
+                "Estonia, Republic of",
+                "Finland, Republic of",
+                "France, French Republic",
+                "Germany, Federal Republic of",
+                "Greece, Hellenic Republic",
+                "Hungary, Republic of",
+                "Iceland, Republic of",
+                "Ireland",
+                "Israel, State of",
+                "Italy, Italian Republic",
+                "Japan",
+                "Korea, Republic of",
+                "Latvia, Republic of",
+                "Lithuania, Republic of",
+                "Luxembourg, Grand Duchy of",
+                "Mexico, United Mexican States",
+                "Netherlands, Kingdom of the",
+                "New Zealand",
+                "Norway, Kingdom of",
+                "Poland, Republic of",
+                "Portugal, Portuguese Republic",
+                "Slovakia (Slovak Republic)",
+                "Slovenia, Republic of",
+                "Spain, Kingdom of",
+                "Sweden, Kingdom of",
+                "Switzerland, Swiss Confederation",
+                "Turkey, Republic of",
+                "United Kingdom of Great Britain & Northern Ireland",
+                "United States of America"
+            ])
+        if "Eurocontrol Members" in selected_organisations:
+            regional_list.extend([
+                "Albania, Republic of",
+                "Armenia, Republic of",
+                "Austria, Republic of",
+                "Azerbaijan, Republic of",
+                "Belgium, Kingdom of",
+                "Bosnia and Herzegovina",
+                "Bulgaria, Republic of",
+                "Croatia, Republic of",
+                "Cyprus, Republic of",
+                "Czech Republic",
+                "Denmark, Kingdom of",
+                "Estonia, Republic of",
+                "Finland, Republic of",
+                "France, French Republic",
+                "Georgia",
+                "Germany, Federal Republic of",
+                "Greece, Hellenic Republic",
+                "Hungary, Republic of",
+                "Iceland, Republic of",
+                "Ireland",
+                "Italy, Italian Republic",
+                "Latvia, Republic of",
+                "Lithuania, Republic of",
+                "Luxembourg, Grand Duchy of",
+                "Malta, Republic of",
+                "Moldova, Republic of",
+                "Monaco, Principality of",
+                "Montenegro, Republic of",
+                "Netherlands, Kingdom of the",
+                "North Macedonia, Republic of",
+                "Norway, Kingdom of",
+                "Poland, Republic of",
+                "Portugal, Portuguese Republic",
+                "Romania",
+                "Serbia, Republic of",
+                "Slovakia (Slovak Republic)",
+                "Slovenia, Republic of",
+                "Spain, Kingdom of",
+                "Sweden, Kingdom of",
+                "Switzerland, Swiss Confederation",
+                "Turkey, Republic of",
+                "Ukraine",
+                "United Kingdom of Great Britain & Northern Ireland"
+            ])
+        if "BRICS" in selected_organisations:
+            regional_list.extend([
+                "Brazil, Federative Republic of",
+                "Russian Federation",
+                "India, Republic of",
+                "China, People's Republic of",
+                "South Africa, Republic of"
+            ])
+
+        self.arrival_country_autocomplete.v_model = list(set(regional_list))
+
     def _reset_all(self, widget, event, data, dataclass):
         self.departure_airport_autocomplete.v_model = list()
         self.departure_country_autocomplete.v_model = list()
+        self.departure_organisation_autocomplete.v_model = list()
         self.departure_continent_autocomplete.v_model = list()
         self.arrival_airport_autocomplete.v_model = list()
         self.arrival_country_autocomplete.v_model = list()
+        self.arrival_organisation_autocomplete.v_model = list()
         self.arrival_continent_autocomplete.v_model = list()
         self.domestic_autocomplete.v_model = list()
         self.airline_autocomplete.v_model = list()
@@ -210,8 +569,13 @@ class AeroMAPSTab:
             dataclass.flights_df.iata_departure.unique().tolist()
         )
         self.departure_country_autocomplete.items = (
-            dataclass.flights_df.departure_country_name.unique().tolist()
+                dataclass.flights_df.departure_country_name.unique().tolist()
         )
+
+        self.departure_organisation_autocomplete.items = (["European Union", "OECD", 'G7',
+         'G20', 'Eurocontrol Members',
+         'BRICS'])
+
         self.departure_continent_autocomplete.items = (
             dataclass.flights_df.departure_continent_name.unique().tolist()
         )
@@ -219,8 +583,13 @@ class AeroMAPSTab:
             dataclass.flights_df.iata_arrival.unique().tolist()
         )
         self.arrival_country_autocomplete.items = (
-            dataclass.flights_df.arrival_country_name.unique().tolist()
+                dataclass.flights_df.arrival_country_name.unique().tolist()
         )
+
+        self.arrival_organisation_autocomplete.items=(["European Union", "OECD", 'G7',
+        'G20', 'Eurocontrol Members',
+        'BRICS'])
+
         self.arrival_continent_autocomplete.items = (
             dataclass.flights_df.arrival_continent_name.unique().tolist()
         )
@@ -247,11 +616,11 @@ class AeroMAPSTab:
         total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
-        ][["CO2 (kg)", "ASK", "Seats"]].sum()
+            ][["CO2 (kg)", "ASK", "Seats"]].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & (self.in_class_flights_df.distance_km <= 4000)
-        ][["CO2 (kg)", "ASK", "Seats"]].sum()
+            ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
             ["CO2 (kg)", "ASK", "Seats"]
         ].sum()
@@ -337,11 +706,11 @@ class AeroMAPSTab:
         total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
-        ][["CO2 (kg)", "ASK", "Seats"]].sum()
+            ][["CO2 (kg)", "ASK", "Seats"]].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & ((self.in_class_flights_df.distance_km <= 4000))
-        ][["CO2 (kg)", "ASK", "Seats"]].sum()
+            ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
             ["CO2 (kg)", "ASK", "Seats"]
         ].sum()
@@ -435,7 +804,7 @@ class AeroMAPSTab:
         self.in_class_flights_df = self.in_class_flights_df[
             (self.in_class_flights_df["distance_km"] >= min_dist)
             & (self.in_class_flights_df["distance_km"] <= max_dist)
-        ].reset_index()
+            ].reset_index()
 
         # active departure filter
         if filtered_departure_airport:
@@ -557,8 +926,11 @@ class AeroMAPSTab:
         )
         if len(self.departure_country_autocomplete.v_model) == 0:
             self.departure_country_autocomplete.items = (
-                self.in_class_flights_df.departure_country_name.unique().tolist()
+                    self.in_class_flights_df.departure_country_name.unique().tolist()
             )
+            self.departure_organisation_autocomplete.v_model = list()
+
+
         self.departure_continent_autocomplete.items = (
             self.in_class_flights_df.departure_continent_name.unique().tolist()
         )
@@ -662,8 +1034,10 @@ class AeroMAPSTab:
         )
         if len(self.arrival_country_autocomplete.v_model) == 0:
             self.arrival_country_autocomplete.items = (
-                self.in_class_flights_df.arrival_country_name.unique().tolist()
+                    self.in_class_flights_df.arrival_country_name.unique().tolist()
             )
+            self.arrival_organisation_autocomplete.v_model = list()
+
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
@@ -927,6 +1301,7 @@ class AeroMAPSTab:
                                         ),
                                         self.departure_airport_autocomplete,
                                         self.departure_country_autocomplete,
+                                        self.departure_organisation_autocomplete,
                                         self.departure_continent_autocomplete,
                                     ]
                                 ),
@@ -939,6 +1314,7 @@ class AeroMAPSTab:
                                         ),
                                         self.arrival_airport_autocomplete,
                                         self.arrival_country_autocomplete,
+                                        self.arrival_organisation_autocomplete,
                                         self.arrival_continent_autocomplete,
                                     ]
                                 ),
