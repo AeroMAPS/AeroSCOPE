@@ -1,7 +1,11 @@
 import logging
 import os
 import os.path as pth
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, RawDescriptionHelpFormatter
+from argparse import (
+    ArgumentDefaultsHelpFormatter,
+    ArgumentParser,
+    RawDescriptionHelpFormatter,
+)
 
 
 MAIN_NOTEBOOK_NAME = pth.join(pth.dirname(__file__), "AeroSCOPE.ipynb")
@@ -13,7 +17,9 @@ class Main:
     """
 
     def __init__(self):
-        class _CustomFormatter(RawDescriptionHelpFormatter, ArgumentDefaultsHelpFormatter):
+        class _CustomFormatter(
+            RawDescriptionHelpFormatter, ArgumentDefaultsHelpFormatter
+        ):
             pass
 
         self.parser = ArgumentParser(

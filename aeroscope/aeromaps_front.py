@@ -94,9 +94,14 @@ class AeroMAPSTab:
             clearable=True,
             chips=True,
             label="International Organisation",
-            items=["European Union", "OECD", 'G7',
-                   'G20', 'Eurocontrol Members',
-                   'BRICS'],
+            items=[
+                "European Union",
+                "OECD",
+                "G7",
+                "G20",
+                "Eurocontrol Members",
+                "BRICS",
+            ],
             multiple=True,
             variant="outlined",
         )
@@ -106,9 +111,14 @@ class AeroMAPSTab:
             clearable=True,
             chips=True,
             label="International Organisation",
-            items=["European Union", "OECD", 'G7',
-                   'G20', 'Eurocontrol Members',
-                   'BRICS'],
+            items=[
+                "European Union",
+                "OECD",
+                "G7",
+                "G20",
+                "Eurocontrol Members",
+                "BRICS",
+            ],
             multiple=True,
             variant="outlined",
         )
@@ -242,332 +252,352 @@ class AeroMAPSTab:
 
         regional_list = []
         if "European Union" in selected_organisations:
-            regional_list.extend([
-                "Austria, Republic of",
-                "Belgium, Kingdom of",
-                "Bulgaria, Republic of",
-                "Croatia, Republic of",
-                "Cyprus, Republic of",
-                "Czech Republic",
-                "Denmark, Kingdom of",
-                "Estonia, Republic of",
-                "Finland, Republic of",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "Greece, Hellenic Republic",
-                "Hungary, Republic of",
-                "Ireland",
-                "Italy, Italian Republic",
-                "Latvia, Republic of",
-                "Lithuania, Republic of",
-                "Luxembourg, Grand Duchy of",
-                "Malta, Republic of",
-                "Netherlands, Kingdom of the",
-                "Poland, Republic of",
-                "Portugal, Portuguese Republic",
-                "Romania",
-                "Slovakia (Slovak Republic)",
-                "Slovenia, Republic of",
-                "Spain, Kingdom of",
-                "Sweden, Kingdom of"
-            ])
+            regional_list.extend(
+                [
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bulgaria, Republic of",
+                    "Croatia, Republic of",
+                    "Cyprus, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Netherlands, Kingdom of the",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Romania",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                ]
+            )
         if "G7" in selected_organisations:
-            regional_list.extend([
-                "Canada",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "Italy, Italian Republic",
-                "Japan",
-                "United Kingdom of Great Britain & Northern Ireland",
-                "United States of America"
-            ])
+            regional_list.extend(
+                [
+                    "Canada",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
         if "G20" in selected_organisations:
-            regional_list.extend([
-                "Argentina, Argentine Republic",
-                "Australia, Commonwealth of",
-                "Brazil, Federative Republic of",
-                "Canada",
-                "China, People's Republic of",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "India, Republic of",
-                "Indonesia, Republic of",
-                "Italy, Italian Republic",
-                "Japan",
-                "Mexico, United Mexican States",
-                "Russian Federation",
-                "Saudi Arabia, Kingdom of",
-                "South Africa, Republic of",
-                "Republic of Korea",
-                "Turkey, Republic of",
-                "United Kingdom of Great Britain & Northern Ireland",
-                "United States of America"
-            ])
+            regional_list.extend(
+                [
+                    "Argentina, Argentine Republic",
+                    "Australia, Commonwealth of",
+                    "Brazil, Federative Republic of",
+                    "Canada",
+                    "China, People's Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "India, Republic of",
+                    "Indonesia, Republic of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "Mexico, United Mexican States",
+                    "Russian Federation",
+                    "Saudi Arabia, Kingdom of",
+                    "South Africa, Republic of",
+                    "Republic of Korea",
+                    "Turkey, Republic of",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
         if "OECD" in selected_organisations:
-            regional_list.extend([
-                "Australia, Commonwealth of",
-                "Austria, Republic of",
-                "Belgium, Kingdom of",
-                "Canada",
-                "Chile, Republic of",
-                "Colombia, Republic of",
-                "Czech Republic",
-                "Denmark, Kingdom of",
-                "Estonia, Republic of",
-                "Finland, Republic of",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "Greece, Hellenic Republic",
-                "Hungary, Republic of",
-                "Iceland, Republic of",
-                "Ireland",
-                "Israel, State of",
-                "Italy, Italian Republic",
-                "Japan",
-                "Korea, Republic of",
-                "Latvia, Republic of",
-                "Lithuania, Republic of",
-                "Luxembourg, Grand Duchy of",
-                "Mexico, United Mexican States",
-                "Netherlands, Kingdom of the",
-                "New Zealand",
-                "Norway, Kingdom of",
-                "Poland, Republic of",
-                "Portugal, Portuguese Republic",
-                "Slovakia (Slovak Republic)",
-                "Slovenia, Republic of",
-                "Spain, Kingdom of",
-                "Sweden, Kingdom of",
-                "Switzerland, Swiss Confederation",
-                "Turkey, Republic of",
-                "United Kingdom of Great Britain & Northern Ireland",
-                "United States of America"
-            ])
+            regional_list.extend(
+                [
+                    "Australia, Commonwealth of",
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Canada",
+                    "Chile, Republic of",
+                    "Colombia, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Iceland, Republic of",
+                    "Ireland",
+                    "Israel, State of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "Korea, Republic of",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Mexico, United Mexican States",
+                    "Netherlands, Kingdom of the",
+                    "New Zealand",
+                    "Norway, Kingdom of",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                    "Switzerland, Swiss Confederation",
+                    "Turkey, Republic of",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
         if "Eurocontrol Members" in selected_organisations:
-            regional_list.extend([
-                "Albania, Republic of",
-                "Armenia, Republic of",
-                "Austria, Republic of",
-                "Azerbaijan, Republic of",
-                "Belgium, Kingdom of",
-                "Bosnia and Herzegovina",
-                "Bulgaria, Republic of",
-                "Croatia, Republic of",
-                "Cyprus, Republic of",
-                "Czech Republic",
-                "Denmark, Kingdom of",
-                "Estonia, Republic of",
-                "Finland, Republic of",
-                "France, French Republic",
-                "Georgia",
-                "Germany, Federal Republic of",
-                "Greece, Hellenic Republic",
-                "Hungary, Republic of",
-                "Iceland, Republic of",
-                "Ireland",
-                "Italy, Italian Republic",
-                "Latvia, Republic of",
-                "Lithuania, Republic of",
-                "Luxembourg, Grand Duchy of",
-                "Malta, Republic of",
-                "Moldova, Republic of",
-                "Monaco, Principality of",
-                "Montenegro, Republic of",
-                "Netherlands, Kingdom of the",
-                "North Macedonia, Republic of",
-                "Norway, Kingdom of",
-                "Poland, Republic of",
-                "Portugal, Portuguese Republic",
-                "Romania",
-                "Serbia, Republic of",
-                "Slovakia (Slovak Republic)",
-                "Slovenia, Republic of",
-                "Spain, Kingdom of",
-                "Sweden, Kingdom of",
-                "Switzerland, Swiss Confederation",
-                "Turkey, Republic of",
-                "Ukraine",
-                "United Kingdom of Great Britain & Northern Ireland"
-            ])
+            regional_list.extend(
+                [
+                    "Albania, Republic of",
+                    "Armenia, Republic of",
+                    "Austria, Republic of",
+                    "Azerbaijan, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bosnia and Herzegovina",
+                    "Bulgaria, Republic of",
+                    "Croatia, Republic of",
+                    "Cyprus, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Georgia",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Iceland, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Moldova, Republic of",
+                    "Monaco, Principality of",
+                    "Montenegro, Republic of",
+                    "Netherlands, Kingdom of the",
+                    "North Macedonia, Republic of",
+                    "Norway, Kingdom of",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Romania",
+                    "Serbia, Republic of",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                    "Switzerland, Swiss Confederation",
+                    "Turkey, Republic of",
+                    "Ukraine",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                ]
+            )
         if "BRICS" in selected_organisations:
-            regional_list.extend([
-                "Brazil, Federative Republic of",
-                "Russian Federation",
-                "India, Republic of",
-                "China, People's Republic of",
-                "South Africa, Republic of"
-            ])
-
+            regional_list.extend(
+                [
+                    "Brazil, Federative Republic of",
+                    "Russian Federation",
+                    "India, Republic of",
+                    "China, People's Republic of",
+                    "South Africa, Republic of",
+                ]
+            )
 
         self.departure_country_autocomplete.v_model = list(set(regional_list))
         self.departure_country_autocomplete.items = list(set(regional_list))
-
 
     def _select_regional_arrival(self, change):
         selected_organisations = self.arrival_organisation_autocomplete.v_model
 
         regional_list = []
         if "European Union" in selected_organisations:
-            regional_list.extend([
-                "Austria, Republic of",
-                "Belgium, Kingdom of",
-                "Bulgaria, Republic of",
-                "Croatia, Republic of",
-                "Cyprus, Republic of",
-                "Czech Republic",
-                "Denmark, Kingdom of",
-                "Estonia, Republic of",
-                "Finland, Republic of",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "Greece, Hellenic Republic",
-                "Hungary, Republic of",
-                "Ireland",
-                "Italy, Italian Republic",
-                "Latvia, Republic of",
-                "Lithuania, Republic of",
-                "Luxembourg, Grand Duchy of",
-                "Malta, Republic of",
-                "Netherlands, Kingdom of the",
-                "Poland, Republic of",
-                "Portugal, Portuguese Republic",
-                "Romania",
-                "Slovakia (Slovak Republic)",
-                "Slovenia, Republic of",
-                "Spain, Kingdom of",
-                "Sweden, Kingdom of"
-            ])
+            regional_list.extend(
+                [
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bulgaria, Republic of",
+                    "Croatia, Republic of",
+                    "Cyprus, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Netherlands, Kingdom of the",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Romania",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                ]
+            )
         if "G7" in selected_organisations:
-            regional_list.extend([
-                "Canada",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "Italy, Italian Republic",
-                "Japan",
-                "United Kingdom of Great Britain & Northern Ireland",
-                "United States of America"
-            ])
+            regional_list.extend(
+                [
+                    "Canada",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
         if "G20" in selected_organisations:
-            regional_list.extend([
-                "Argentina, Argentine Republic",
-                "Australia, Commonwealth of",
-                "Brazil, Federative Republic of",
-                "Canada",
-                "China, People's Republic of",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "India, Republic of",
-                "Indonesia, Republic of",
-                "Italy, Italian Republic",
-                "Japan",
-                "Mexico, United Mexican States",
-                "Russian Federation",
-                "Saudi Arabia, Kingdom of",
-                "South Africa, Republic of",
-                "Republic of Korea",
-                "Turkey, Republic of",
-                "United Kingdom of Great Britain & Northern Ireland",
-                "United States of America"
-            ])
+            regional_list.extend(
+                [
+                    "Argentina, Argentine Republic",
+                    "Australia, Commonwealth of",
+                    "Brazil, Federative Republic of",
+                    "Canada",
+                    "China, People's Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "India, Republic of",
+                    "Indonesia, Republic of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "Mexico, United Mexican States",
+                    "Russian Federation",
+                    "Saudi Arabia, Kingdom of",
+                    "South Africa, Republic of",
+                    "Republic of Korea",
+                    "Turkey, Republic of",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
         if "OECD" in selected_organisations:
-            regional_list.extend([
-                "Australia, Commonwealth of",
-                "Austria, Republic of",
-                "Belgium, Kingdom of",
-                "Canada",
-                "Chile, Republic of",
-                "Colombia, Republic of",
-                "Czech Republic",
-                "Denmark, Kingdom of",
-                "Estonia, Republic of",
-                "Finland, Republic of",
-                "France, French Republic",
-                "Germany, Federal Republic of",
-                "Greece, Hellenic Republic",
-                "Hungary, Republic of",
-                "Iceland, Republic of",
-                "Ireland",
-                "Israel, State of",
-                "Italy, Italian Republic",
-                "Japan",
-                "Korea, Republic of",
-                "Latvia, Republic of",
-                "Lithuania, Republic of",
-                "Luxembourg, Grand Duchy of",
-                "Mexico, United Mexican States",
-                "Netherlands, Kingdom of the",
-                "New Zealand",
-                "Norway, Kingdom of",
-                "Poland, Republic of",
-                "Portugal, Portuguese Republic",
-                "Slovakia (Slovak Republic)",
-                "Slovenia, Republic of",
-                "Spain, Kingdom of",
-                "Sweden, Kingdom of",
-                "Switzerland, Swiss Confederation",
-                "Turkey, Republic of",
-                "United Kingdom of Great Britain & Northern Ireland",
-                "United States of America"
-            ])
+            regional_list.extend(
+                [
+                    "Australia, Commonwealth of",
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Canada",
+                    "Chile, Republic of",
+                    "Colombia, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Iceland, Republic of",
+                    "Ireland",
+                    "Israel, State of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "Korea, Republic of",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Mexico, United Mexican States",
+                    "Netherlands, Kingdom of the",
+                    "New Zealand",
+                    "Norway, Kingdom of",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                    "Switzerland, Swiss Confederation",
+                    "Turkey, Republic of",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
         if "Eurocontrol Members" in selected_organisations:
-            regional_list.extend([
-                "Albania, Republic of",
-                "Armenia, Republic of",
-                "Austria, Republic of",
-                "Azerbaijan, Republic of",
-                "Belgium, Kingdom of",
-                "Bosnia and Herzegovina",
-                "Bulgaria, Republic of",
-                "Croatia, Republic of",
-                "Cyprus, Republic of",
-                "Czech Republic",
-                "Denmark, Kingdom of",
-                "Estonia, Republic of",
-                "Finland, Republic of",
-                "France, French Republic",
-                "Georgia",
-                "Germany, Federal Republic of",
-                "Greece, Hellenic Republic",
-                "Hungary, Republic of",
-                "Iceland, Republic of",
-                "Ireland",
-                "Italy, Italian Republic",
-                "Latvia, Republic of",
-                "Lithuania, Republic of",
-                "Luxembourg, Grand Duchy of",
-                "Malta, Republic of",
-                "Moldova, Republic of",
-                "Monaco, Principality of",
-                "Montenegro, Republic of",
-                "Netherlands, Kingdom of the",
-                "North Macedonia, Republic of",
-                "Norway, Kingdom of",
-                "Poland, Republic of",
-                "Portugal, Portuguese Republic",
-                "Romania",
-                "Serbia, Republic of",
-                "Slovakia (Slovak Republic)",
-                "Slovenia, Republic of",
-                "Spain, Kingdom of",
-                "Sweden, Kingdom of",
-                "Switzerland, Swiss Confederation",
-                "Turkey, Republic of",
-                "Ukraine",
-                "United Kingdom of Great Britain & Northern Ireland"
-            ])
+            regional_list.extend(
+                [
+                    "Albania, Republic of",
+                    "Armenia, Republic of",
+                    "Austria, Republic of",
+                    "Azerbaijan, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bosnia and Herzegovina",
+                    "Bulgaria, Republic of",
+                    "Croatia, Republic of",
+                    "Cyprus, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Georgia",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Iceland, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Moldova, Republic of",
+                    "Monaco, Principality of",
+                    "Montenegro, Republic of",
+                    "Netherlands, Kingdom of the",
+                    "North Macedonia, Republic of",
+                    "Norway, Kingdom of",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Romania",
+                    "Serbia, Republic of",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                    "Switzerland, Swiss Confederation",
+                    "Turkey, Republic of",
+                    "Ukraine",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                ]
+            )
         if "BRICS" in selected_organisations:
-            regional_list.extend([
-                "Brazil, Federative Republic of",
-                "Russian Federation",
-                "India, Republic of",
-                "China, People's Republic of",
-                "South Africa, Republic of"
-            ])
+            regional_list.extend(
+                [
+                    "Brazil, Federative Republic of",
+                    "Russian Federation",
+                    "India, Republic of",
+                    "China, People's Republic of",
+                    "South Africa, Republic of",
+                ]
+            )
 
-        self.arrival_country_autocomplete.v_model = list(
-            set(regional_list))
-        self.arrival_country_autocomplete.items = list(
-            set(regional_list))
+        self.arrival_country_autocomplete.v_model = list(set(regional_list))
+        self.arrival_country_autocomplete.items = list(set(regional_list))
 
     def _reset_all(self, widget, event, data, dataclass):
         self.departure_airport_autocomplete.v_model = list()
@@ -585,12 +615,17 @@ class AeroMAPSTab:
             dataclass.flights_df.iata_departure.unique().tolist()
         )
         self.departure_country_autocomplete.items = (
-                dataclass.flights_df.departure_country_name.unique().tolist()
+            dataclass.flights_df.departure_country_name.unique().tolist()
         )
 
-        self.departure_organisation_autocomplete.items = (["European Union", "OECD", 'G7',
-         'G20', 'Eurocontrol Members',
-         'BRICS'])
+        self.departure_organisation_autocomplete.items = [
+            "European Union",
+            "OECD",
+            "G7",
+            "G20",
+            "Eurocontrol Members",
+            "BRICS",
+        ]
 
         self.departure_continent_autocomplete.items = (
             dataclass.flights_df.departure_continent_name.unique().tolist()
@@ -599,12 +634,17 @@ class AeroMAPSTab:
             dataclass.flights_df.iata_arrival.unique().tolist()
         )
         self.arrival_country_autocomplete.items = (
-                dataclass.flights_df.arrival_country_name.unique().tolist()
+            dataclass.flights_df.arrival_country_name.unique().tolist()
         )
 
-        self.arrival_organisation_autocomplete.items=(["European Union", "OECD", 'G7',
-        'G20', 'Eurocontrol Members',
-        'BRICS'])
+        self.arrival_organisation_autocomplete.items = [
+            "European Union",
+            "OECD",
+            "G7",
+            "G20",
+            "Eurocontrol Members",
+            "BRICS",
+        ]
 
         self.arrival_continent_autocomplete.items = (
             dataclass.flights_df.arrival_continent_name.unique().tolist()
@@ -632,11 +672,11 @@ class AeroMAPSTab:
         total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
-            ][["CO2 (kg)", "ASK", "Seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & (self.in_class_flights_df.distance_km <= 4000)
-            ][["CO2 (kg)", "ASK", "Seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
             ["CO2 (kg)", "ASK", "Seats"]
         ].sum()
@@ -693,10 +733,18 @@ class AeroMAPSTab:
             },
             {
                 "name": "Share of world CO2 (%)",
-                "val": total_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
-                "sr": sr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
-                "mr": mr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
-                "lr": lr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "val": total_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
+                "sr": sr_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
+                "mr": mr_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
+                "lr": lr_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
             },
         ]
 
@@ -722,11 +770,11 @@ class AeroMAPSTab:
         total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
         sr_sums = self.in_class_flights_df[
             self.in_class_flights_df.distance_km <= 1500
-            ][["CO2 (kg)", "ASK", "Seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & ((self.in_class_flights_df.distance_km <= 4000))
-            ][["CO2 (kg)", "ASK", "Seats"]].sum()
+        ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
             ["CO2 (kg)", "ASK", "Seats"]
         ].sum()
@@ -783,10 +831,18 @@ class AeroMAPSTab:
             },
             {
                 "name": "Share of world CO2 (%)",
-                "val": total_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
-                "sr": sr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
-                "mr": mr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
-                "lr": lr_sums["CO2 (kg)"] / dataclass.flights_df['CO2 (kg)'].sum() * 100,
+                "val": total_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
+                "sr": sr_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
+                "mr": mr_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
+                "lr": lr_sums["CO2 (kg)"]
+                / dataclass.flights_df["CO2 (kg)"].sum()
+                * 100,
             },
         ]
 
@@ -820,7 +876,7 @@ class AeroMAPSTab:
         self.in_class_flights_df = self.in_class_flights_df[
             (self.in_class_flights_df["distance_km"] >= min_dist)
             & (self.in_class_flights_df["distance_km"] <= max_dist)
-            ].reset_index()
+        ].reset_index()
 
         # active departure filter
         if filtered_departure_airport:
@@ -943,10 +999,9 @@ class AeroMAPSTab:
         )
         if len(self.departure_country_autocomplete.v_model) == 0:
             self.departure_country_autocomplete.items = (
-                    self.in_class_flights_df.departure_country_name.unique().tolist()
+                self.in_class_flights_df.departure_country_name.unique().tolist()
             )
             self.departure_organisation_autocomplete.v_model = list()
-
 
         self.departure_continent_autocomplete.items = (
             self.in_class_flights_df.departure_continent_name.unique().tolist()
@@ -978,8 +1033,8 @@ class AeroMAPSTab:
         )
 
         self.departure_country_autocomplete.items = (
-                    self.in_class_flights_df.departure_country_name.unique().tolist()
-            )
+            self.in_class_flights_df.departure_country_name.unique().tolist()
+        )
 
         self.departure_continent_autocomplete.items = (
             self.in_class_flights_df.departure_continent_name.unique().tolist()
@@ -1084,7 +1139,7 @@ class AeroMAPSTab:
         )
         if len(self.arrival_country_autocomplete.v_model) == 0:
             self.arrival_country_autocomplete.items = (
-                    self.in_class_flights_df.arrival_country_name.unique().tolist()
+                self.in_class_flights_df.arrival_country_name.unique().tolist()
             )
             self.arrival_organisation_autocomplete.v_model = list()
 
@@ -1287,25 +1342,43 @@ class AeroMAPSTab:
             children=[
                 v.CardText(
                     children=[
-                        v.Html(tag="div", children=[
-                            v.Html(tag="p", class_="text-center ma-0", children=[
-                                "DISCLAIMER"
-                            ]),
-                            v.Html(tag="p", class_="text-center ma-0", children=[
-                                "Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions. ",
-                            ]),
-                            v.Html(tag="p", class_="text-center ma-0", children=[
-                                "Comparison between aircraft types performances NOT VALID. ",
-                            ]),
-                            v.Html(tag="p", class_="text-center ma-0", children=[
-                                "See zenodo.org/records/10143773 for more details."
-                            ]),
-                            v.Html(tag="p", class_="text-center ma-0", children=[
-                                "All the metrics are for 2019."
-                            ]),
-                        ]),
+                        v.Html(
+                            tag="div",
+                            children=[
+                                v.Html(
+                                    tag="p",
+                                    class_="text-center ma-0",
+                                    children=["DISCLAIMER"],
+                                ),
+                                v.Html(
+                                    tag="p",
+                                    class_="text-center ma-0",
+                                    children=[
+                                        "Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions. ",
+                                    ],
+                                ),
+                                v.Html(
+                                    tag="p",
+                                    class_="text-center ma-0",
+                                    children=[
+                                        "Comparison between aircraft types performances NOT VALID. ",
+                                    ],
+                                ),
+                                v.Html(
+                                    tag="p",
+                                    class_="text-center ma-0",
+                                    children=[
+                                        "See zenodo.org/records/10143773 for more details."
+                                    ],
+                                ),
+                                v.Html(
+                                    tag="p",
+                                    class_="text-center ma-0",
+                                    children=["All the metrics are for 2019."],
+                                ),
+                            ],
+                        ),
                     ],
-
                     class_="text-center ma-0 teal--text darken-4",
                     style_="font-size: 16px;",
                 ),
