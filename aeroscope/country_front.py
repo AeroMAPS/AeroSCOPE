@@ -17,10 +17,9 @@ class CountriesTab:
             v_model=[],
             clearable=True,
             chips=True,
-            label="Countries",
-            items=list(
-                aeroscopedataclass.country_flows.departure_country_name.unique()
-            ),
+            label="Countries (or regional groups)",
+            items=list(aeroscopedataclass.country_flows.departure_country_name.unique())
+            + ["European Union", "OECD", "G7", "G20", "Eurocontrol Members", "BRICS"],
             multiple=True,
             variant="outlined",
         )
@@ -95,6 +94,8 @@ class CountriesTab:
     def _make_connections(self, dataclass):
         self.select_world_button.on_event("click", self._select_world)
 
+        self.autocomplete.observe(self._select_regional, names="v_model")
+
         # TODO +++ change the filtering logic: decoupling from plot switch to avoid unnecessary operations!
         self.autocomplete.observe(
             partial(self._plot1_update, dataclass=dataclass), names="v_model"
@@ -128,6 +129,180 @@ class CountriesTab:
 
     def _select_world(self, widget, event, data):
         self.autocomplete.v_model = list()
+
+    def _select_regional(self, change):
+        selected_countries = self.autocomplete.v_model
+
+        regional_list = []
+        if "European Union" in selected_countries:
+            regional_list.extend(
+                [
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bulgaria, Republic of",
+                    "Croatia, Republic of",
+                    "Cyprus, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Netherlands, Kingdom of the",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Romania",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                ]
+            )
+        if "G7" in selected_countries:
+            regional_list.extend(
+                [
+                    "Canada",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
+        if "G20" in selected_countries:
+            regional_list.extend(
+                [
+                    "Argentina, Argentine Republic",
+                    "Australia, Commonwealth of",
+                    "Brazil, Federative Republic of",
+                    "Canada",
+                    "China, People's Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "India, Republic of",
+                    "Indonesia, Republic of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "Mexico, United Mexican States",
+                    "Russian Federation",
+                    "Saudi Arabia, Kingdom of",
+                    "South Africa, Republic of",
+                    "Republic of Korea",
+                    "Turkey, Republic of",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
+        if "OECD" in selected_countries:
+            regional_list.extend(
+                [
+                    "Australia, Commonwealth of",
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Canada",
+                    "Chile, Republic of",
+                    "Colombia, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Iceland, Republic of",
+                    "Ireland",
+                    "Israel, State of",
+                    "Italy, Italian Republic",
+                    "Japan",
+                    "Korea, Republic of",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Mexico, United Mexican States",
+                    "Netherlands, Kingdom of the",
+                    "New Zealand",
+                    "Norway, Kingdom of",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                    "Switzerland, Swiss Confederation",
+                    "Turkey, Republic of",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                    "United States of America",
+                ]
+            )
+        if "Eurocontrol Members" in selected_countries:
+            regional_list.extend(
+                [
+                    "Albania, Republic of",
+                    "Armenia, Republic of",
+                    "Austria, Republic of",
+                    "Azerbaijan, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bosnia and Herzegovina",
+                    "Bulgaria, Republic of",
+                    "Croatia, Republic of",
+                    "Cyprus, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "Georgia",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Hungary, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Moldova, Republic of",
+                    "Monaco, Principality of",
+                    "Montenegro, Republic of",
+                    "Netherlands, Kingdom of the",
+                    "North Macedonia, Republic of",
+                    "Norway, Kingdom of",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Romania",
+                    "Serbia, Republic of",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of",
+                    "Switzerland, Swiss Confederation",
+                    "Turkey, Republic of",
+                    "Ukraine",
+                    "United Kingdom of Great Britain & Northern Ireland",
+                ]
+            )
+        if "BRICS" in selected_countries:
+            regional_list.extend(
+                [
+                    "Brazil, Federative Republic of",
+                    "Russian Federation",
+                    "India, Republic of",
+                    "China, People's Republic of",
+                    "South Africa, Republic of",
+                ]
+            )
+
+        self.autocomplete.v_model = list(set(regional_list) | set(selected_countries))
 
     def _render_initial_plots(self, dataclass):
         if dataclass.type == "compilation":
@@ -169,6 +344,38 @@ class CountriesTab:
                 else:
                     fig_ctry_1 = country_level_plots.countries_treemap_plot(
                         dataclass.country_flows, value_watched_ctry
+                    )
+                display(fig_ctry_1)
+
+        # Case of regional subgroup selected: not a flow plot to avoid plot over loading
+        elif any(
+            group in filtered_values
+            for group in [
+                "European Union",
+                "OECD",
+                "G7",
+                "G20",
+                "Eurocontrol Members",
+                "BRICS",
+            ]
+        ):
+            filtered_country_flows = dataclass.country_flows[
+                dataclass.country_flows["departure_country_name"].isin(filtered_values)
+            ].reset_index()
+
+            filtered_country_fixed = dataclass.country_fixed[
+                dataclass.country_fixed["departure_country_name"].isin(filtered_values)
+            ].reset_index()
+
+            with self.output_1:
+                self.output_1.clear_output(wait=True)
+                if active_main_graph_country == "map":
+                    fig_ctry_1 = country_level_plots.countries_global_plot(
+                        filtered_country_fixed, value_watched_ctry
+                    )
+                else:
+                    fig_ctry_1 = country_level_plots.countries_treemap_plot(
+                        filtered_country_flows, value_watched_ctry
                     )
                 display(fig_ctry_1)
 

@@ -241,7 +241,7 @@ class ContinentalTab:
                     children=[
                         v.CardText(
                             children=[
-                                "Please wait for the plots to be rendered before changing the indicator or the continents. \n Doing so could break the process. \n If it happens please relaod the page."
+                                "Please wait for the plots to be rendered before changing the indicator or the continents. \n Doing so could break the process. \n If it happens please reload the page."
                             ],
                             class_="text-center teal--text darken-4",
                             style_="font-size: 16px;",
