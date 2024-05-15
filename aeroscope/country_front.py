@@ -244,7 +244,7 @@ class CountriesTab:
                     "United States of America",
                 ]
             )
-        if "Eurecontrol Members" in selected_countries:
+        if "Eurocontrol Members" in selected_countries:
             regional_list.extend(
                 [
                     "Albania, Republic of",
