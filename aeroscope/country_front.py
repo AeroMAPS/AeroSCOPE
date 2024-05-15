@@ -265,7 +265,6 @@ class CountriesTab:
                     "Germany, Federal Republic of",
                     "Greece, Hellenic Republic",
                     "Hungary, Republic of",
-                    "Iceland, Republic of",
                     "Ireland",
                     "Italy, Italian Republic",
                     "Latvia, Republic of",
