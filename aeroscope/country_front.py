@@ -96,7 +96,7 @@ class CountriesTab:
         self.select_world_button.on_event("click", self._select_world)
 
         self.autocomplete.observe(
-           self._select_europe, names="v_model"
+           self._select_regional, names="v_model"
         )
 
         # TODO +++ change the filtering logic: decoupling from plot switch to avoid unnecessary operations!
@@ -133,7 +133,7 @@ class CountriesTab:
     def _select_world(self, widget, event, data):
         self.autocomplete.v_model = list()
 
-    def _select_europe(self, change):
+    def _select_regional(self, change):
         selected_countries = self.autocomplete.v_model
 
         regional_list=[]
@@ -294,7 +294,6 @@ class CountriesTab:
                 "South Africa, Republic of"
             ])
 
-        print(regional_list)
         self.autocomplete.v_model = list(set(regional_list)|set(selected_countries))
 
 
