@@ -1,4 +1,9 @@
 # Changelog
+## Version 0.2.3-beta 
+*What's Changed*
+- Added energy per ASK on export table by @antSGS in https://github.com/AeroMAPS/AeroSCOPE/pull/14
+- Creation of additional filter for International Organisations and minor typo fixes by @antSGS in https://github.com/AeroMAPS/AeroSCOPE/pull/15
+- Minor features added by @antSGS in https://github.com/AeroMAPS/AeroSCOPE/pull/16
 
 ## Version 0.2.2-beta
 
