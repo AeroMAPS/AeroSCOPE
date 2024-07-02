@@ -19,7 +19,16 @@ class CountriesTab:
             chips=True,
             label="Countries (or regional groups)",
             items=list(aeroscopedataclass.country_flows.departure_country_name.unique())
-            + ["European Union", "OECD", "G7", "G20", "Eurocontrol Members", "BRICS"],
+            + [
+                "European Union",
+                "European Union + Outermost Regions",
+                "OECD",
+                "G7",
+                "G20",
+                "Eurocontrol Members",
+                "BRICS",
+                "France + Overseas",
+            ],
             multiple=True,
             variant="outlined",
         )
@@ -164,6 +173,60 @@ class CountriesTab:
                     "Slovenia, Republic of",
                     "Spain, Kingdom of",
                     "Sweden, Kingdom of",
+                ]
+            )
+        if "European Union + Outermost Regions" in selected_countries:
+            regional_list.extend(
+                [
+                    "Austria, Republic of",
+                    "Belgium, Kingdom of",
+                    "Bulgaria, Republic of",
+                    "Mayotte",
+                    "Croatia, Republic of",
+                    "Czech Republic",
+                    "Denmark, Kingdom of",
+                    "Estonia, Republic of",
+                    "Finland, Republic of",
+                    "France, French Republic",
+                    "French Guiana",
+                    "Germany, Federal Republic of",
+                    "Greece, Hellenic Republic",
+                    "Guadeloupe",
+                    "Hungary, Republic of",
+                    "Ireland",
+                    "Italy, Italian Republic",
+                    "Latvia, Republic of",
+                    "Lithuania, Republic of",
+                    "Luxembourg, Grand Duchy of",
+                    "Malta, Republic of",
+                    "Martinique",
+                    "Netherlands, Kingdom of the",
+                    "Poland, Republic of",
+                    "Portugal, Portuguese Republic",
+                    "Reunion",
+                    "Romania",
+                    "Slovakia (Slovak Republic)",
+                    "Slovenia, Republic of",
+                    "Spain, Kingdom of",
+                    "Sweden, Kingdom of","Saint Martin"
+
+                ]
+            )
+        if "France + Overseas" in selected_countries:
+            regional_list.extend(
+                [
+                    "Mayotte",
+                    "French Polynesia",
+                    "Guadeloupe",
+                    "French Guiana",
+                    "Martinique",
+                    "New Caledonia",
+                    "Reunion",
+                    "Saint Barthelemy",
+                    "Saint Pierre and Miquelon",
+                    "Wallis and Futuna",
+                    "Saint Martin",
+                    "France, French Republic",
                 ]
             )
         if "G7" in selected_countries:
@@ -352,6 +415,7 @@ class CountriesTab:
             group in filtered_values
             for group in [
                 "European Union",
+                "European Union + Outermost Regions",
                 "OECD",
                 "G7",
                 "G20",
