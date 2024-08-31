@@ -6,7 +6,6 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
-import random
 import matplotlib.pyplot as plt
 
 
@@ -14,9 +13,9 @@ def countries_map_plot(country_flows, value_watched_ctry):
     # Create the scattergeo figure
     fig = go.Figure()
 
-    meanval = country_flows[
-        country_flows["departure_country"] != country_flows["arrival_country"]
-    ][value_watched_ctry].mean()
+    meanval = country_flows[country_flows["departure_country"] != country_flows["arrival_country"]][
+        value_watched_ctry
+    ].mean()
 
     for i in range(len(country_flows)):
         if country_flows["departure_country"][i] == country_flows["arrival_country"][i]:
@@ -224,9 +223,7 @@ def distance_share_country(flights_df, value_watched_ctry):
     )
     ax.yaxis.set_major_formatter(formatter)
     ax.set_title(
-        "Aircraft class used vs flight distance\nWeighting on:{}".format(
-            value_watched_ctry
-        )
+        "Aircraft class used vs flight distance\nWeighting on:{}".format(value_watched_ctry)
     )
     ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
     ax.set_xlabel("Distance (km)")
@@ -252,9 +249,7 @@ def distance_share_dom_int_country(flights_df, value_watched_ctry):
     )
     ax.yaxis.set_major_formatter(formatter)
     ax.legend(title="Flight Type", labels=["Domestic", "International"])
-    ax.set_title(
-        "Flight type vs flight distance\nWeighting on :{}".format(value_watched_ctry)
-    )
+    ax.set_title("Flight type vs flight distance\nWeighting on :{}".format(value_watched_ctry))
     ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
     ax.set_xlabel("Distance (km)")
     ax.set_ylabel("Flight type distribution (%)")
@@ -291,9 +286,7 @@ def countries_global_plot(country_fixed, value_watched_ctry):
         height=800,
         title="Country values for {}".format(value_watched_ctry),
     )
-    fig.update_layout(
-        margin=dict(l=5, r=5, t=60, b=5)
-    )  # Adjust layout margins and padding
+    fig.update_layout(margin=dict(l=5, r=5, t=60, b=5))  # Adjust layout margins and padding
     return fig
 
 
@@ -317,9 +310,7 @@ def countries_treemap_plot(country_flows, value_watched_ctry):
     )
 
     if value_watched_ctry == "CO2 (kg)":
-        fig.update_traces(
-            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)"
-        )
+        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)")
     elif value_watched_ctry == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
     elif value_watched_ctry == "Seats":
@@ -389,9 +380,7 @@ def distance_histogram_plot_country(flights_df, value_watched_ctry):
 
 
 def aircraft_pie(flights_df, value_watched_ctry):
-    top_aircraft = (
-        flights_df.groupby("acft_icao")[value_watched_ctry].sum().nlargest(10)
-    )
+    top_aircraft = flights_df.groupby("acft_icao")[value_watched_ctry].sum().nlargest(10)
     other_total = flights_df[value_watched_ctry].sum() - top_aircraft.sum()
     top_aircraft.loc["Other"] = other_total
     fig = px.pie(
@@ -431,9 +420,7 @@ def aircraft_class_pie(flights_df, value_watched_ctry):
 
 
 def aircraft_user_pie(flights_df, value_watched_ctry):
-    top_airlines = (
-        flights_df.groupby("airline_iata")[value_watched_ctry].sum().nlargest(10)
-    )
+    top_airlines = flights_df.groupby("airline_iata")[value_watched_ctry].sum().nlargest(10)
     other_total = flights_df[value_watched_ctry].sum() - top_airlines.sum()
     top_airlines.loc["Other"] = other_total
     fig = px.pie(
@@ -455,9 +442,7 @@ def aircraft_user_pie(flights_df, value_watched_ctry):
 
 def dom_share_pie(flights_df, value_watched_ctry):
     df_group = flights_df.groupby("domestic")[value_watched_ctry].sum().reset_index()
-    df_group["domestic"] = (
-        df_group["domestic"].replace(0, "International").replace(1, "Domestic")
-    )
+    df_group["domestic"] = df_group["domestic"].replace(0, "International").replace(1, "Domestic")
     fig = px.pie(
         values=df_group[value_watched_ctry],
         names=df_group.domestic,

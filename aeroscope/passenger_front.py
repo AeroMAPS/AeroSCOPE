@@ -35,9 +35,7 @@ class PassengerTab:
         self._make_layout()
 
     def _make_connections(self, dataclass):
-        self.autocomplete.observe(
-            partial(self._plot1_update, dataclass=dataclass), names="v_model"
-        )
+        self.autocomplete.observe(partial(self._plot1_update, dataclass=dataclass), names="v_model")
 
     def _render_initial_plots(self):
         with self.output_1:
@@ -77,22 +75,18 @@ class PassengerTab:
                 )
 
                 # Remove flights if not enough seats for this mode (avoid exotic routes)
-                flights_df_od = flights_df_od[
-                    flights_df_od["Seats"] > 20000
-                ].reset_index()
+                flights_df_od = flights_df_od[flights_df_od["Seats"] > 20000].reset_index()
                 # Apply the function to the DataFrame column
                 flights_df_od["airline_iata"] = flights_df_od["airline_iata"].apply(
                     remove_duplicates
                 )
-                flights_df_od["acft_icao"] = flights_df_od["acft_icao"].apply(
-                    remove_duplicates
-                )
+                flights_df_od["acft_icao"] = flights_df_od["acft_icao"].apply(remove_duplicates)
                 fig_pax_1 = pax_level_plots.pax_map_plot(flights_df_od)
 
                 display(fig_pax_1)
 
     def _make_layout(self):
-        h_divider = v.Divider(vertical=False)
+        # h_divider = v.Divider(vertical=False)
         v_divider = v.Divider(vertical=True)
         ### PAGE ARCHITECTURE
 

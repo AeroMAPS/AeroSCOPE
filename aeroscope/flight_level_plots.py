@@ -8,7 +8,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
-import random
 
 
 def flights_map_plot(flights_gpb_df, value_watched_flights):
@@ -99,9 +98,7 @@ def flights_map_plot(flights_gpb_df, value_watched_flights):
         height=800,
         title="Route values for {}".format(value_watched_flights),
     )
-    fig.update_layout(
-        margin=dict(l=5, r=5, t=60, b=5)
-    )  # Adjust layout margins and padding
+    fig.update_layout(margin=dict(l=5, r=5, t=60, b=5))  # Adjust layout margins and padding
     return fig
 
 
@@ -193,9 +190,7 @@ def flights_map_plot_OS(flights_gpb_df, value_watched_flights):
         height=800,
         title="Route values for {}".format(value_watched_flights),
     )
-    fig.update_layout(
-        margin=dict(l=5, r=5, t=60, b=5)
-    )  # Adjust layout margins and padding
+    fig.update_layout(margin=dict(l=5, r=5, t=60, b=5))  # Adjust layout margins and padding
     return fig
 
 
@@ -220,9 +215,7 @@ def flights_treemap_plot(flights_df, value_watched_flights):
     )
 
     if value_watched_flights == "CO2 (kg)":
-        fig.update_traces(
-            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)"
-        )
+        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)")
     elif value_watched_flights == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
     elif value_watched_flights == "Seats":
@@ -254,9 +247,7 @@ def flights_treemap_plot_OS(flights_df, value_watched_flights):
     )
 
     if value_watched_flights == "CO2 (kg)":
-        fig.update_traces(
-            hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)"
-        )
+        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)")
     elif value_watched_flights == "ASK":
         fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
     elif value_watched_flights == "Seats":
@@ -391,9 +382,7 @@ def distance_share_flights(flights_df, value_watched_ctry):
     )
     ax.yaxis.set_major_formatter(formatter)
     ax.set_title(
-        "Aircraft class used vs flight distance\nWeighting on:{}".format(
-            value_watched_ctry
-        )
+        "Aircraft class used vs flight distance\nWeighting on:{}".format(value_watched_ctry)
     )
     ax.set_xlabel("Distance (km)")
     ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
@@ -419,9 +408,7 @@ def distance_share_dom_int_flights(flights_df, value_watched_ctry):
     )
     ax.yaxis.set_major_formatter(formatter)
     ax.legend(title="Flight Type", labels=["Domestic", "International"])
-    ax.set_title(
-        "Flight type vs flight distance\nWeighting on :{}".format(value_watched_ctry)
-    )
+    ax.set_title("Flight type vs flight distance\nWeighting on :{}".format(value_watched_ctry))
     ax.set_xlabel("Distance (km)")
     ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
     ax.set_ylabel("Flight type distribution (%)")
@@ -429,9 +416,7 @@ def distance_share_dom_int_flights(flights_df, value_watched_ctry):
 
 
 def aircraft_pie_flights(flights_df, value_watched_flights):
-    top_aircraft = (
-        flights_df.groupby("acft_icao")[value_watched_flights].sum().nlargest(10)
-    )
+    top_aircraft = flights_df.groupby("acft_icao")[value_watched_flights].sum().nlargest(10)
     other_total = flights_df[value_watched_flights].sum() - top_aircraft.sum()
     top_aircraft.loc["Other"] = other_total
     fig = px.pie(
@@ -452,9 +437,7 @@ def aircraft_pie_flights(flights_df, value_watched_flights):
 
 
 def aircraft_user_pie_flights(flights_df, value_watched_flights):
-    top_airlines = (
-        flights_df.groupby("airline_iata")[value_watched_flights].sum().nlargest(10)
-    )
+    top_airlines = flights_df.groupby("airline_iata")[value_watched_flights].sum().nlargest(10)
     other_total = flights_df[value_watched_flights].sum() - top_airlines.sum()
     top_airlines.loc["Other"] = other_total
     fig = px.pie(
@@ -495,9 +478,7 @@ def aircraft_class_pie_flights(flights_df, value_watched_ctry):
 
 def dom_share_pie_flights(flights_df, value_watched_ctry):
     df_group = flights_df.groupby("domestic")[value_watched_ctry].sum().reset_index()
-    df_group["domestic"] = (
-        df_group["domestic"].replace(0, "International").replace(1, "Domestic")
-    )
+    df_group["domestic"] = df_group["domestic"].replace(0, "International").replace(1, "Domestic")
     fig = px.pie(
         values=df_group[value_watched_ctry],
         names=df_group.domestic,
