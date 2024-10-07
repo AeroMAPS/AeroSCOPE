@@ -181,14 +181,12 @@ class AeroMAPSTab:
         )
 
         self.link_with_image = widgets.HTML(
-            f'<a href="https://aeromaps.isae-supaero.fr/" target="_blank">'
-            f'<img src="logo/aeromaps.png" alt="Logo" style="width: 120px; height: 100px;">'
+            '<a href="https://aeromaps.isae-supaero.fr/" target="_blank">'
+            '<img src="logo/aeromaps.png" alt="Logo" style="width: 120px; height: 100px;">'
             "</a>"
         )
 
-        self.dl_button = ipywidgets.Button(
-            description="Download table", button_style="info"
-        )
+        self.dl_button = ipywidgets.Button(description="Download table", button_style="info")
 
         self._render_initial_table(aeroscopedataclass)
         self._make_connections(aeroscopedataclass)
@@ -197,9 +195,7 @@ class AeroMAPSTab:
         display(self.download_output)
 
     def _make_connections(self, dataclass):
-        self.reset_all_button.on_event(
-            "click", partial(self._reset_all, dataclass=dataclass)
-        )
+        self.reset_all_button.on_event("click", partial(self._reset_all, dataclass=dataclass))
 
         self.departure_organisation_autocomplete.observe(
             self._select_regional_departure, names="v_model"
@@ -321,7 +317,7 @@ class AeroMAPSTab:
                     "Slovenia, Republic of",
                     "Spain, Kingdom of",
                     "Sweden, Kingdom of",
-                    "Saint Martin"
+                    "Saint Martin",
                 ]
             )
         if "France + Overseas" in selected_organisations:
@@ -549,8 +545,8 @@ class AeroMAPSTab:
                     "Slovakia (Slovak Republic)",
                     "Slovenia, Republic of",
                     "Spain, Kingdom of",
-                    "Sweden, Kingdom of","Saint Martin"
-
+                    "Sweden, Kingdom of",
+                    "Saint Martin",
                 ]
             )
         if "France + Overseas" in selected_organisations:
@@ -763,15 +759,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             dataclass.flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            dataclass.flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            dataclass.flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            dataclass.flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = dataclass.flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = dataclass.flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = dataclass.flights_df.acft_icao.unique().tolist()
         self.range_slider.v_model = [0, dataclass.flights_df.distance_km.max() + 50]
 
     def _render_initial_table(self, dataclass):
@@ -784,9 +774,9 @@ class AeroMAPSTab:
         ]
 
         total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
-        sr_sums = self.in_class_flights_df[
-            self.in_class_flights_df.distance_km <= 1500
-        ][["CO2 (kg)", "ASK", "Seats"]].sum()
+        sr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km <= 1500][
+            ["CO2 (kg)", "ASK", "Seats"]
+        ].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
             & (self.in_class_flights_df.distance_km <= 4000)
@@ -847,18 +837,10 @@ class AeroMAPSTab:
             },
             {
                 "name": "Share of world CO2 (%)",
-                "val": total_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
-                "sr": sr_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
-                "mr": mr_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
-                "lr": lr_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
+                "val": total_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
+                "sr": sr_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
+                "mr": mr_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
+                "lr": lr_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
             },
         ]
 
@@ -882,12 +864,12 @@ class AeroMAPSTab:
         ]
 
         total_sums = self.in_class_flights_df[["CO2 (kg)", "ASK", "Seats"]].sum()
-        sr_sums = self.in_class_flights_df[
-            self.in_class_flights_df.distance_km <= 1500
-        ][["CO2 (kg)", "ASK", "Seats"]].sum()
+        sr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km <= 1500][
+            ["CO2 (kg)", "ASK", "Seats"]
+        ].sum()
         mr_sums = self.in_class_flights_df[
             (self.in_class_flights_df.distance_km > 1500)
-            & ((self.in_class_flights_df.distance_km <= 4000))
+            & (self.in_class_flights_df.distance_km <= 4000)
         ][["CO2 (kg)", "ASK", "Seats"]].sum()
         lr_sums = self.in_class_flights_df[self.in_class_flights_df.distance_km > 4000][
             ["CO2 (kg)", "ASK", "Seats"]
@@ -945,18 +927,10 @@ class AeroMAPSTab:
             },
             {
                 "name": "Share of world CO2 (%)",
-                "val": total_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
-                "sr": sr_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
-                "mr": mr_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
-                "lr": lr_sums["CO2 (kg)"]
-                / dataclass.flights_df["CO2 (kg)"].sum()
-                * 100,
+                "val": total_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
+                "sr": sr_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
+                "mr": mr_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
+                "lr": lr_sums["CO2 (kg)"] / dataclass.flights_df["CO2 (kg)"].sum() * 100,
             },
         ]
 
@@ -997,27 +971,21 @@ class AeroMAPSTab:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["iata_departure"].isin(
-                    filtered_departure_airport
-                )
+                self.in_class_flights_df["iata_departure"].isin(filtered_departure_airport)
             ].reset_index()
 
         if filtered_departure_country:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["departure_country_name"].isin(
-                    filtered_departure_country
-                )
+                self.in_class_flights_df["departure_country_name"].isin(filtered_departure_country)
             ].reset_index()
 
         if filtered_departure_conti:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["departure_continent_name"].isin(
-                    filtered_departure_conti
-                )
+                self.in_class_flights_df["departure_continent_name"].isin(filtered_departure_conti)
             ].reset_index()
 
         # active arrival filter
@@ -1032,18 +1000,14 @@ class AeroMAPSTab:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["arrival_country_name"].isin(
-                    filtered_arrival_country
-                )
+                self.in_class_flights_df["arrival_country_name"].isin(filtered_arrival_country)
             ].reset_index()
 
         if filtered_arrival_conti:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["arrival_continent_name"].isin(
-                    filtered_arrival_conti
-                )
+                self.in_class_flights_df["arrival_continent_name"].isin(filtered_arrival_conti)
             ].reset_index()
 
         # active airline filter
@@ -1094,18 +1058,11 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_dep_ctry(self, change, dataclass):
-
         self._filter_common_code(dataclass=dataclass)
 
         self.departure_airport_autocomplete.items = (
@@ -1129,15 +1086,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_orga(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1162,15 +1113,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_dep_conti(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1194,15 +1139,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_arr_arpt(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1226,15 +1165,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_arr_ctry(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1260,15 +1193,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_arr_conti(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1292,15 +1219,9 @@ class AeroMAPSTab:
             self.arrival_continent_autocomplete.items = (
                 self.in_class_flights_df.arrival_continent_name.unique().tolist()
             )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_airline(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1323,16 +1244,12 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
         if len(self.airline_autocomplete.v_model) == 0:
             self.airline_autocomplete.items = (
                 self.in_class_flights_df.airline_iata.unique().tolist()
             )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_aircraft(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1355,16 +1272,10 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
         if len(self.aircraft_autocomplete.v_model) == 0:
-            self.aircraft_autocomplete.items = (
-                self.in_class_flights_df.acft_icao.unique().tolist()
-            )
+            self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_type(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1388,15 +1299,9 @@ class AeroMAPSTab:
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
         if len(self.domestic_autocomplete.v_model) == 0:
-            self.domestic_autocomplete.items = (
-                self.in_class_flights_df.domestic.unique().tolist()
-            )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+            self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _df_update_distance(self, change, dataclass):
         self._filter_common_code(dataclass=dataclass)
@@ -1419,15 +1324,9 @@ class AeroMAPSTab:
         self.arrival_continent_autocomplete.items = (
             self.in_class_flights_df.arrival_continent_name.unique().tolist()
         )
-        self.domestic_autocomplete.items = (
-            self.in_class_flights_df.domestic.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.domestic_autocomplete.items = self.in_class_flights_df.domestic.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
     def _trigger_download_dataframe(self, dataframe, filename, kind="text/csv"):
         csv_content = dataframe.to_csv(index=False)
@@ -1444,12 +1343,10 @@ class AeroMAPSTab:
             display(HTML(f"<script>{js_code}</script>"))
 
     def _download_dataframe(self, e=None):
-        self._trigger_download_dataframe(
-            self.df_metrics, "dataframe_aeromaps.csv", kind="text/csv"
-        )
+        self._trigger_download_dataframe(self.df_metrics, "dataframe_aeromaps.csv", kind="text/csv")
 
     def _make_layout(self):
-        h_divider = v.Divider(vertical=False)
+        # h_divider = v.Divider(vertical=False)
         v_divider = v.Divider(vertical=True)
         row_disclaimer_aeromaps = v.Col(
             # cols='12',  # Adjust the column width as needed
@@ -1481,9 +1378,7 @@ class AeroMAPSTab:
                                 v.Html(
                                     tag="p",
                                     class_="text-center ma-0",
-                                    children=[
-                                        "See zenodo.org/records/10143773 for more details."
-                                    ],
+                                    children=["See zenodo.org/records/10143773 for more details."],
                                 ),
                                 v.Html(
                                     tag="p",
@@ -1573,9 +1468,7 @@ class AeroMAPSTab:
                                                 self.reset_all_button,
                                                 v.Btn(
                                                     children=["IATA code?"],
-                                                    _metadata={
-                                                        "mount_id": "link_button"
-                                                    },
+                                                    _metadata={"mount_id": "link_button"},
                                                     href="https://www.iata.org/en/publications/directories/code-search/",
                                                     target="_blank",
                                                     color="light-blue-darken-4",
@@ -1583,9 +1476,7 @@ class AeroMAPSTab:
                                                 ),
                                                 v.Btn(
                                                     children=["ICAO code?"],
-                                                    _metadata={
-                                                        "mount_id": "link_button"
-                                                    },
+                                                    _metadata={"mount_id": "link_button"},
                                                     href="https://www.icao.int/publications/doc8643/pages/search.aspx",
                                                     target="_blank",
                                                     color="light-blue-darken-4",

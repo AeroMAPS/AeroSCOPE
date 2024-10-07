@@ -2,6 +2,12 @@
   <img src=https://github.com/AeroMAPS/AeroSCOPE/assets/97613437/1824dcdd-1c25-489c-96e0-4897a0773b7c />
 </p>
 
+[![image](https://img.shields.io/pypi/v/aeroscope.svg)](https://pypi.python.org/pypi/aeroscope)
+[![image](https://img.shields.io/pypi/pyversions/aeroscope.svg)](https://pypi.python.org/pypi/aeroscope)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+![Tests](https://github.com/AeroMAPS/AeroSCOPE/workflows/tests/badge.svg)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 # Welcome 
 AeroSCOPE is a project that aims to bring together various open data sources on air transport in order to better understand the geographical distribution of air transport.

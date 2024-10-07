@@ -4,11 +4,7 @@
 # @Software: PyCharm
 
 
-import plotly.express as px
 import plotly.graph_objects as go
-import seaborn as sns
-import matplotlib.pyplot as plt
-import random
 
 
 def pax_map_plot(flights_gpb_df):
@@ -46,8 +42,7 @@ def pax_map_plot(flights_gpb_df):
             text=flights_gpb_df["CO2 Ppax"],
             mode="markers",
             marker=dict(
-                size=flights_gpb_df["CO2 Ppax"]
-                / (0.01 * flights_gpb_df["CO2 Ppax"].mean()),
+                size=flights_gpb_df["CO2 Ppax"] / (0.01 * flights_gpb_df["CO2 Ppax"].mean()),
                 color="#ffb703",
                 sizemode="area",
                 opacity=0.8,
@@ -69,7 +64,5 @@ def pax_map_plot(flights_gpb_df):
         height=800,
         title="Route values for {}".format("CO2 Ppax (kg)"),
     )
-    fig.update_layout(
-        margin=dict(l=5, r=5, t=60, b=5)
-    )  # Adjust layout margins and padding
+    fig.update_layout(margin=dict(l=5, r=5, t=60, b=5))  # Adjust layout margins and padding
     return fig
