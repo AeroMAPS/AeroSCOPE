@@ -164,10 +164,10 @@ class AeroMAPSTab:
         ############# Distance filter #############
 
         self.range_slider = v.RangeSlider(
-            v_model=[0, aeroscopedataclass.flights_df.distance_km.max() + 50],
-            max=aeroscopedataclass.flights_df.distance_km.max() + 50,
+            v_model=[0, aeroscopedataclass.flights_df.distance_km.max() + 10],
+            max=aeroscopedataclass.flights_df.distance_km.max() + 10,
             min=0,
-            step=50,
+            step=10,
             label="Distance (km)",
             color="#050A30",
             track_color="grey",
