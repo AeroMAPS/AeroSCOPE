@@ -114,7 +114,9 @@ class PassengerTab:
                                             tag="p",
                                             class_="text-center ma-0",
                                             children=[
-                                                "Accuracy is limited (particularly in some regions) in this mode. Data must therefore be used with the necessary precautions. ",
+                                                "Accuracy is very limited in this mode, as route per route data is displayed."
+                                                "Outliers (private jets, ...) can be present."
+                                                "Use the mode with the necessary precautions. ",
                                             ],
                                         ),
                                         v.Html(
