@@ -188,30 +188,39 @@ def distance_cumul_plot_country(flights_df):
 
     return fig
 
-
 def distance_cumul_plot_country_OS(flights_df):
-    sns.set_style("darkgrid")
-    # Create a new figure with a single subplot
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.histplot(
-        flights_df,
-        x="distance_km",
-        weights="n_flights",
-        label="Flights",
-        element="poly",
-        fill=False,
-        cumulative=True,
-        stat="percent",
-        ax=ax,
-        bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),
+    fig = go.Figure()
+
+    # Define bins for a quick cumulative distribution rendering. 10 km
+    bins = list(range(0, int(flights_df["distance_km"].max()) + 10, 10))
+
+    # Cumulative distributions for each metric
+    # N Flights
+    hist_flights, edges_flights = flights_df["n_flights"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_cumul_flights = hist_flights.cumsum() / hist_flights.sum() * 100
+    fig.add_trace(go.Scatter(
+        x=edges_flights,
+        y=hist_cumul_flights,
+        mode="lines",
+        name="Number of flights",
+        line=dict(color='#1f77b4', width=2),
+        hovertemplate="%{y:.2f} %",
+    ))
+
+    # Formatting
+    fig.update_layout(
+        title="Metrics cumulative distribution vs flight distance",
+        xaxis_title="Distance (km)",
+        yaxis_title="Cumulative distribution (%)",
+        template="plotly_white",
+        hovermode="x",
+        margin=dict(l=60, r=60, t=60, b=60),
+        legend=dict(
+            x=0.82,
+            y=0.08,
+            bgcolor="rgba(255, 255, 255, 0.5)",
+        )
     )
-
-    ax.legend()
-
-    # Set the title, x-axis label, and y-axis label
-    ax.set_title("Metrics cumulative distribution vs flight distance.")
-    ax.set_xlabel("Distance (km)")
-    ax.set_ylabel("Cumulative distribution (%)")
 
     return fig
 
@@ -239,6 +248,44 @@ def distance_share_country(flights_df, value_watched_ctry):
     ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
     ax.set_xlabel("Distance (km)")
     ax.set_ylabel("Aircraft class distribution (%)")
+    return fig
+
+
+
+def distance_share_country(flights_df, value_watched_ctry):
+    fig = go.Figure()
+
+    # Define bins (500 km interval)
+    bins = list(range(0, int(flights_df["distance_km"].max()) + 500, 500))
+    flights_df["distance_bin"] = pd.cut(flights_df["distance_km"], bins, labels=bins[:-1], right=False)
+
+    # Compute shares per aircraft class
+    grouped = flights_df.groupby(["distance_bin", "acft_class"])[value_watched_ctry].sum().unstack(fill_value=0)
+    share_df = grouped.div(grouped.sum(axis=1), axis=0) * 100  # Convert to percentage
+
+    # Add traces for each aircraft class
+    for acft_class in share_df.columns:
+        fig.add_trace(go.Scatter(
+            x=share_df.index.astype(int),  # Convert bin labels to integer for plotting
+            y=share_df[acft_class],
+            mode="lines",
+            stackgroup="one",
+            name=acft_class,
+            hovertemplate="Distance: %{x} km<br>%{y:.2f}%<extra></extra>",
+        ))
+
+    # Formatting
+    fig.update_layout(
+        title=f"Aircraft class used vs flight distance<br>Weighting on: {value_watched_ctry}",
+        xaxis_title="Distance (km)",
+        yaxis_title="Aircraft class distribution (%)",
+        template="plotly_white",
+        hovermode="x unified",
+        yaxis=dict(tickformat=".0f", range=[0, 100]),  # Ensure % scaling
+        xaxis=dict(range=[0, bins[-1]]),
+        legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
+    )
+
     return fig
 
 
