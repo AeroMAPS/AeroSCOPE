@@ -283,29 +283,61 @@ def distance_share_country(flights_df, value_watched_ctry):
     return fig
 
 
-def distance_share_dom_int_country(flights_df, value_watched_ctry):
-    sns.set_style("darkgrid")
 
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.histplot(
-        data=flights_df,
-        x="distance_km",
-        weights=value_watched_ctry,
-        common_norm=False,
-        multiple="fill",
-        hue="domestic",
-        edgecolor="none",
-        bins=range(0, int(flights_df["distance_km"].max()) + 500, 500),
-        alpha=0.6,
-        ax=ax,
+def distance_share_dom_int_country(flights_df, value_watched_ctry):
+    fig = go.Figure()
+
+    bin_width = 500
+    bins = list(range(0, int(flights_df["distance_km"].max()) + bin_width, bin_width))
+    bin_centers = [b + bin_width / 2 for b in bins[:-1]]
+
+    grouped = flights_df.groupby([pd.cut(flights_df["distance_km"], bins), "domestic"])[
+        value_watched_ctry].sum().unstack(fill_value=0)
+
+    share_df = grouped.div(grouped.sum(axis=1), axis=0) * 100
+
+    bin_ranges = [
+        f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers
+    ]
+
+    for flight_type in share_df.columns:
+        fig.add_trace(go.Bar(
+            x=bin_centers,
+            y=share_df[flight_type],
+            name="Domestic" if flight_type == 1 else "International",
+            width=bin_width,
+            opacity=0.7,
+            hovertemplate=(
+                    "Distance %{customdata} km:<br>" +
+                    "%{y:.2f} %<extra></extra>"
+            ),
+            customdata=bin_ranges,
+            marker=dict(
+                line=dict(width=0)
+            ),
+        ))
+
+
+    fig.update_layout(
+        title=f"Flight type vs flight distance<br>Weighting on: {value_watched_ctry}",
+        xaxis_title="Distance (km)",
+        yaxis_title="Flight type distribution (%)",
+        template="plotly_white",
+        hovermode="closest",
+        barmode="stack",
+        yaxis=dict(tickformat=".0f", range=[0, 100]),  # Ensure % scaling
+        xaxis=dict(
+            tickmode="linear",
+            dtick=bin_width,
+            range=[0, bins[-1]],
+        ),
+        legend_title="Flight Type",
+        legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
+        colorway=px.colors.qualitative.T10,
     )
-    ax.yaxis.set_major_formatter(formatter)
-    ax.legend(title="Flight Type", labels=["Domestic", "International"])
-    ax.set_title("Flight type vs flight distance\nWeighting on :{}".format(value_watched_ctry))
-    ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
-    ax.set_xlabel("Distance (km)")
-    ax.set_ylabel("Flight type distribution (%)")
+
     return fig
+
 
 
 def countries_global_plot(country_fixed, value_watched_ctry):
@@ -429,6 +461,57 @@ def distance_histogram_plot_country(flights_df, value_watched_ctry):
     ax.set_xlabel("Distance (km)")
     ax.set_ylabel(value_watched_ctry)
     return fig
+
+
+
+
+def distance_histogram_plot_country(flights_df, value_watched_ctry):
+    fig = go.Figure()
+
+    # Define bins for the histogram (500 km intervals)
+    bin_width = 500
+    bins = list(range(0, int(flights_df["distance_km"].max()) + bin_width, bin_width))
+    bin_centers = [b + bin_width / 2 for b in bins[:-1]]  # Midpoints of each bin
+
+    bin_ranges = [
+        f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers
+    ]
+
+    # Compute the sum of values in each bin
+    grouped = flights_df.groupby(pd.cut(flights_df["distance_km"], bins))[
+        value_watched_ctry].sum()
+
+    # Add bars for the histogram
+    fig.add_trace(go.Bar(
+        x=bin_centers,  # Use the center of bins for tick alignment
+        y=grouped,
+        name=value_watched_ctry,
+        width=bin_width,  # Ensure bars have correct width
+        marker=dict(color="#EE9B00", opacity=0.5),
+        hovertemplate=(
+            "Distance %{customdata} km:<br>" +
+            value_watched_ctry + " %{y:.2e}<extra></extra>"
+        ),
+        customdata=bin_ranges,
+    ))
+
+    # Formatting
+    fig.update_layout(
+        title=f"Repartition of {value_watched_ctry} by flight distance",
+        xaxis_title="Distance (km)",
+        yaxis_title=value_watched_ctry,
+        template="plotly_white",
+        hovermode="closest",
+        bargap=0.3,
+        xaxis=dict(
+            tickmode="linear",
+            dtick=bin_width,
+            range=[0, bins[-1]],
+        ),
+    )
+
+    return fig
+
 
 
 def aircraft_pie(flights_df, value_watched_ctry):
