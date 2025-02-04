@@ -87,7 +87,7 @@ def flights_map_plot(flights_gpb_df, value_watched_flights):
             hovertemplate="Flights to: "
             + "%{customdata}<br>"
             + value_watched_flights
-            + ": %{text:.0f}<br>"
+            + ": %{text:.2e}<br>"
             + "<extra></extra>",
         )
     )
@@ -179,7 +179,7 @@ def flights_map_plot_OS(flights_gpb_df, value_watched_flights):
             hovertemplate="Flights to: "
             + "%{customdata}<br>"
             + value_watched_flights
-            + ": %{text:.0f}<br>"
+            + ": %{text:.2e}<br>"
             + "<extra></extra>",
         )
     )
@@ -215,13 +215,13 @@ def flights_treemap_plot(flights_df, value_watched_flights):
     )
 
     if value_watched_flights == "CO2 (kg)":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2e} (kg)")
     elif value_watched_flights == "ASK":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2e}")
     elif value_watched_flights == "Seats":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2f}")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2e}")
     elif value_watched_flights == "n_flights":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2f}")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2e}")
 
     return fig
 
@@ -247,13 +247,13 @@ def flights_treemap_plot_OS(flights_df, value_watched_flights):
     )
 
     if value_watched_flights == "CO2 (kg)":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (kg)")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2e} (kg)")
     elif value_watched_flights == "ASK":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2f}")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>ASK=%{value:.2e}")
     elif value_watched_flights == "Seats":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2f}")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>Seats=%{value:.2e}")
     elif value_watched_flights == "n_flights":
-        fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2f}")
+        fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2e}")
 
     return fig
 
@@ -425,7 +425,7 @@ def aircraft_pie_flights(flights_df, value_watched_flights):
         color_discrete_sequence=px.colors.qualitative.T10,
         labels={"names": "Aircraft", "values": value_watched_flights},
     )
-    fig.update_traces(textposition="inside")
+    fig.update_traces(textposition="inside",hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by aircraft model".format(value_watched_flights),
@@ -446,7 +446,7 @@ def aircraft_user_pie_flights(flights_df, value_watched_flights):
         color_discrete_sequence=px.colors.qualitative.T10,
         labels={"names": "Airline", "values": value_watched_flights},
     )
-    fig.update_traces(textposition="inside")
+    fig.update_traces(textposition="inside",hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by airline".format(value_watched_flights),
@@ -465,7 +465,7 @@ def aircraft_class_pie_flights(flights_df, value_watched_ctry):
         color_discrete_sequence=px.colors.qualitative.T10,
         labels={"names": "Class", "values": value_watched_ctry},
     )
-    fig.update_traces(textposition="inside")
+    fig.update_traces(textposition="inside", hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by aircraft class".format(value_watched_ctry),
@@ -484,7 +484,7 @@ def dom_share_pie_flights(flights_df, value_watched_ctry):
         names=df_group.domestic,
         color_discrete_sequence=px.colors.qualitative.T10,
     )
-    fig.update_traces(textposition="inside")
+    fig.update_traces(textposition="inside", hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by type".format(value_watched_ctry),
