@@ -225,65 +225,59 @@ def distance_cumul_plot_country_OS(flights_df):
     return fig
 
 
-def distance_share_country(flights_df, value_watched_ctry):
-    sns.set_style("darkgrid")
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.histplot(
-        data=flights_df,
-        x="distance_km",
-        weights=value_watched_ctry,
-        common_norm=False,
-        multiple="fill",
-        hue="acft_class",
-        edgecolor="none",
-        bins=range(0, int(flights_df["distance_km"].max()) + 500, 500),
-        alpha=0.6,
-        ax=ax,
-    )
-    ax.yaxis.set_major_formatter(formatter)
-    ax.set_title(
-        "Aircraft class used vs flight distance\nWeighting on:{}".format(value_watched_ctry)
-    )
-    ax.set_xlim(0, int(flights_df["distance_km"].max()) + 500)
-    ax.set_xlabel("Distance (km)")
-    ax.set_ylabel("Aircraft class distribution (%)")
-    return fig
-
-
 
 def distance_share_country(flights_df, value_watched_ctry):
     fig = go.Figure()
 
-    # Define bins (500 km interval)
-    bins = list(range(0, int(flights_df["distance_km"].max()) + 500, 500))
-    flights_df["distance_bin"] = pd.cut(flights_df["distance_km"], bins, labels=bins[:-1], right=False)
+    # Define bins (500 km intervals)
+    bin_width = 500
+    bins = list(range(0, int(flights_df["distance_km"].max()) + bin_width, bin_width))
+    bin_centers = [b + bin_width / 2 for b in bins[:-1]]  # Midpoints of each bin
 
-    # Compute shares per aircraft class
-    grouped = flights_df.groupby(["distance_bin", "acft_class"])[value_watched_ctry].sum().unstack(fill_value=0)
+    # Compute shares without modifying flights_df
+    grouped = flights_df.groupby([pd.cut(flights_df["distance_km"], bins, right=False), "acft_class"])[
+        value_watched_ctry].sum().unstack(fill_value=0)
     share_df = grouped.div(grouped.sum(axis=1), axis=0) * 100  # Convert to percentage
 
-    # Add traces for each aircraft class
+    bin_ranges = [
+        f"{b - bin_width / 2}-{b + bin_width /2}" for b in bin_centers
+    ]
+
+    # Add traces for each aircraft class (stacked bars)
     for acft_class in share_df.columns:
-        fig.add_trace(go.Scatter(
-            x=share_df.index.astype(int),  # Convert bin labels to integer for plotting
+        fig.add_trace(go.Bar(
+            x=bin_centers,  # Use the center of bins for tick alignment
             y=share_df[acft_class],
-            mode="lines",
-            stackgroup="one",
             name=acft_class,
-            hovertemplate="Distance: %{x} km<br>%{y:.2f}%<extra></extra>",
+            width=bin_width,  # Ensure bars have correct width
+            opacity=0.7,  # Add transparency to the bars
+            hovertemplate=(
+                "Distance %{customdata} km:<br>"  # Bin range precomputed
+                "Share of " + acft_class + ": %{y:.2f} %<extra></extra>"
+            ),
+            customdata=bin_ranges,  # Pass the bin range as customdata
+            marker=dict(
+                line=dict(width=0)  # Remove the white line between bars
+            ),
         ))
 
-    # Formatting
+    # Formatting (Stacked Histogram)
     fig.update_layout(
         title=f"Aircraft class used vs flight distance<br>Weighting on: {value_watched_ctry}",
         xaxis_title="Distance (km)",
         yaxis_title="Aircraft class distribution (%)",
         template="plotly_white",
-        hovermode="x unified",
+        hovermode="closest",
+        barmode="stack",  # Stacked histogram style
         yaxis=dict(tickformat=".0f", range=[0, 100]),  # Ensure % scaling
-        xaxis=dict(range=[0, bins[-1]]),
+        xaxis=dict(
+            tickmode="linear",
+            dtick=bin_width,
+            range=[0, bins[-1]],
+            title="Distance (km)",
+        ),
         legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
+        colorway=px.colors.qualitative.T10,
     )
 
     return fig
