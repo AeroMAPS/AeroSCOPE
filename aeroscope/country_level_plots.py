@@ -7,6 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def countries_map_plot(country_flows, value_watched_ctry):
@@ -128,52 +129,62 @@ def formatter(x, pos):
 
 
 def distance_cumul_plot_country(flights_df):
-    sns.set_style("darkgrid")
-    # Create a new figure with a single subplot
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.histplot(
-        flights_df,
-        x="distance_km",
-        weights="Seats",
-        label="Seats",
-        element="poly",
-        fill=False,
-        cumulative=True,
-        stat="percent",
-        ax=ax,
-        bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),
-    )
-    sns.histplot(
-        flights_df,
-        x="distance_km",
-        weights="ASK",
-        label="ASK",
-        element="poly",
-        fill=False,
-        cumulative=True,
-        stat="percent",
-        ax=ax,
-        bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),
-    )
-    sns.histplot(
-        flights_df,
-        x="distance_km",
-        weights="CO2 (kg)",
-        label="$\mathregular{CO_2}$",
-        element="poly",
-        fill=False,
-        cumulative=True,
-        stat="percent",
-        ax=ax,
-        bins=range(0, int(flights_df["distance_km"].max()) + 50, 50),
-    )
+    fig = go.Figure()
 
-    ax.legend()
+    # Define bins for a quick cumulative distribution rendering. 10 km
+    bins = list(range(0, int(flights_df["distance_km"].max()) + 10, 10))
 
-    # Set the title, x-axis label, and y-axis label
-    ax.set_title("Metrics cumulative distribution vs flight distance.")
-    ax.set_xlabel("Distance (km)")
-    ax.set_ylabel("Cumulative distribution (%)")
+    # Cumulative distributions for each metric
+    # Seats
+    hist_seats, edges_seats = flights_df["Seats"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_cumul_seats = hist_seats.cumsum() / hist_seats.sum() * 100
+    fig.add_trace(go.Scatter(
+        x=edges_seats,
+        y=hist_cumul_seats,
+        mode="lines",
+        name="Seats",
+        line=dict(color='#1f77b4', width=2),
+        hovertemplate="%{y:.2f} %",
+    ))
+
+    # ASK
+    hist_ask, edges_ask = flights_df["ASK"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_cumul_ask = hist_ask.cumsum() / hist_ask.sum() * 100
+    fig.add_trace(go.Scatter(
+        x=edges_ask,
+        y=hist_cumul_ask,
+        mode="lines",
+        name="ASK",
+        line=dict(color='#ff7f0e', width=2),
+        hovertemplate="%{y:.2f} %",
+    ))
+
+    #  CO2
+    hist_co2, edges_co2 = flights_df["CO2 (kg)"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_cumul_co2 = hist_co2.cumsum() / hist_co2.sum() * 100
+    fig.add_trace(go.Scatter(
+        x=edges_co2,
+        y=hist_cumul_co2,
+        mode="lines",
+        name="CO2 (kg)",
+        line=dict(color='#2ca02c', width=2),
+        hovertemplate="%{y:.2f} %",
+    ))
+
+    # Formatting
+    fig.update_layout(
+        title="Metrics cumulative distribution vs flight distance",
+        xaxis_title="Distance (km)",
+        yaxis_title="Cumulative distribution (%)",
+        template="plotly_white",
+        hovermode="x",
+        margin=dict(l=60, r=60, t=60, b=60),
+        legend=dict(
+            x=0.82,
+            y=0.08,
+            bgcolor="rgba(255, 255, 255, 0.5)",
+        )
+    )
 
     return fig
 
