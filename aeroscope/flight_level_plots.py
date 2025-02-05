@@ -257,8 +257,6 @@ def flights_treemap_plot_OS(flights_df, value_watched_flights):
     return fig
 
 
-
-
 def distance_histogram_plot_flights(flights_df, value_watched_flights):
     fig = go.Figure()
 
@@ -267,27 +265,29 @@ def distance_histogram_plot_flights(flights_df, value_watched_flights):
     bins = list(range(0, int(flights_df["distance_km"].max()) + bin_width, bin_width))
     bin_centers = [b + bin_width / 2 for b in bins[:-1]]  # Midpoints of each bin
 
-    bin_ranges = [
-        f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers
-    ]
+    bin_ranges = [f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers]
 
     # Compute the sum of values in each bin
     grouped = flights_df.groupby(pd.cut(flights_df["distance_km"], bins))[
-        value_watched_flights].sum()
+        value_watched_flights
+    ].sum()
 
     # Add bars for the histogram
-    fig.add_trace(go.Bar(
-        x=bin_centers,  # Use the center of bins for tick alignment
-        y=grouped,
-        name=value_watched_flights,
-        width=bin_width,  # Ensure bars have correct width
-        marker=dict(color="#EE9B00", opacity=0.5),
-        hovertemplate=(
-            "Distance %{customdata} km:<br>" +
-            value_watched_flights + " %{y:.2e}<extra></extra>"
-        ),
-        customdata=bin_ranges,
-    ))
+    fig.add_trace(
+        go.Bar(
+            x=bin_centers,  # Use the center of bins for tick alignment
+            y=grouped,
+            name=value_watched_flights,
+            width=bin_width,  # Ensure bars have correct width
+            marker=dict(color="#EE9B00", opacity=0.5),
+            hovertemplate=(
+                "Distance %{customdata} km:<br>"
+                + value_watched_flights
+                + " %{y:.2e}<extra></extra>"
+            ),
+            customdata=bin_ranges,
+        )
+    )
 
     # Formatting
     fig.update_layout(
@@ -321,40 +321,55 @@ def distance_cumul_plot_flights(flights_df):
 
     # Cumulative distributions for each metric
     # Seats
-    hist_seats, edges_seats = flights_df["Seats"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_seats, edges_seats = (
+        flights_df["Seats"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        bins[1:],
+    )
     hist_cumul_seats = hist_seats.cumsum() / hist_seats.sum() * 100
-    fig.add_trace(go.Scatter(
-        x=edges_seats,
-        y=hist_cumul_seats,
-        mode="lines",
-        name="Seats",
-        line=dict(color='#1f77b4', width=2),
-        hovertemplate="%{y:.2f} %",
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=edges_seats,
+            y=hist_cumul_seats,
+            mode="lines",
+            name="Seats",
+            line=dict(color="#1f77b4", width=2),
+            hovertemplate="%{y:.2f} %",
+        )
+    )
 
     # ASK
-    hist_ask, edges_ask = flights_df["ASK"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_ask, edges_ask = (
+        flights_df["ASK"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        bins[1:],
+    )
     hist_cumul_ask = hist_ask.cumsum() / hist_ask.sum() * 100
-    fig.add_trace(go.Scatter(
-        x=edges_ask,
-        y=hist_cumul_ask,
-        mode="lines",
-        name="ASK",
-        line=dict(color='#ff7f0e', width=2),
-        hovertemplate="%{y:.2f} %",
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=edges_ask,
+            y=hist_cumul_ask,
+            mode="lines",
+            name="ASK",
+            line=dict(color="#ff7f0e", width=2),
+            hovertemplate="%{y:.2f} %",
+        )
+    )
 
     #  CO2
-    hist_co2, edges_co2 = flights_df["CO2 (kg)"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_co2, edges_co2 = (
+        flights_df["CO2 (kg)"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        bins[1:],
+    )
     hist_cumul_co2 = hist_co2.cumsum() / hist_co2.sum() * 100
-    fig.add_trace(go.Scatter(
-        x=edges_co2,
-        y=hist_cumul_co2,
-        mode="lines",
-        name="CO2 (kg)",
-        line=dict(color='#2ca02c', width=2),
-        hovertemplate="%{y:.2f} %",
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=edges_co2,
+            y=hist_cumul_co2,
+            mode="lines",
+            name="CO2 (kg)",
+            line=dict(color="#2ca02c", width=2),
+            hovertemplate="%{y:.2f} %",
+        )
+    )
 
     # Formatting
     fig.update_layout(
@@ -368,7 +383,7 @@ def distance_cumul_plot_flights(flights_df):
             x=0.82,
             y=0.08,
             bgcolor="rgba(255, 255, 255, 0.5)",
-        )
+        ),
     )
 
     return fig
@@ -382,16 +397,21 @@ def distance_cumul_plot_flights_OS(flights_df):
 
     # Cumulative distributions for each metric
     # N Flights
-    hist_flights, edges_flights = flights_df["n_flights"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(), bins[1:]
+    hist_flights, edges_flights = (
+        flights_df["n_flights"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        bins[1:],
+    )
     hist_cumul_flights = hist_flights.cumsum() / hist_flights.sum() * 100
-    fig.add_trace(go.Scatter(
-        x=edges_flights,
-        y=hist_cumul_flights,
-        mode="lines",
-        name="Number of flights",
-        line=dict(color='#1f77b4', width=2),
-        hovertemplate="%{y:.2f} %",
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=edges_flights,
+            y=hist_cumul_flights,
+            mode="lines",
+            name="Number of flights",
+            line=dict(color="#1f77b4", width=2),
+            hovertemplate="%{y:.2f} %",
+        )
+    )
 
     # Formatting
     fig.update_layout(
@@ -405,12 +425,10 @@ def distance_cumul_plot_flights_OS(flights_df):
             x=0.82,
             y=0.08,
             bgcolor="rgba(255, 255, 255, 0.5)",
-        )
+        ),
     )
 
     return fig
-
-
 
 
 def distance_share_flights(flights_df, value_watched_flights):
@@ -421,31 +439,33 @@ def distance_share_flights(flights_df, value_watched_flights):
     bins = list(range(0, int(flights_df["distance_km"].max()) + bin_width, bin_width))
     bin_centers = [b + bin_width / 2 for b in bins[:-1]]  # find middle of each bin
 
-    grouped = flights_df.groupby([pd.cut(flights_df["distance_km"], bins, right=False), "acft_class"])[
-        value_watched_flights].sum().unstack(fill_value=0)
+    grouped = (
+        flights_df.groupby([pd.cut(flights_df["distance_km"], bins, right=False), "acft_class"])[
+            value_watched_flights
+        ]
+        .sum()
+        .unstack(fill_value=0)
+    )
     share_df = grouped.div(grouped.sum(axis=1), axis=0) * 100  # Convert to percentage
 
-    bin_ranges = [
-        f"{b - bin_width / 2}-{b + bin_width /2}" for b in bin_centers
-    ]
-
+    bin_ranges = [f"{b - bin_width / 2}-{b + bin_width /2}" for b in bin_centers]
 
     for acft_class in share_df.columns:
-        fig.add_trace(go.Bar(
-            x=bin_centers,
-            y=share_df[acft_class],
-            name=acft_class,
-            width=bin_width,
-            opacity=0.7,
-            hovertemplate=(
-                "Distance %{customdata} km:<br>"  #
-                "Share of " + acft_class + ": %{y:.2f} %<extra></extra>"
-            ),
-            customdata=bin_ranges,
-            marker=dict(
-                line=dict(width=0)
-            ),
-        ))
+        fig.add_trace(
+            go.Bar(
+                x=bin_centers,
+                y=share_df[acft_class],
+                name=acft_class,
+                width=bin_width,
+                opacity=0.7,
+                hovertemplate=(
+                    "Distance %{customdata} km:<br>"  #
+                    "Share of " + acft_class + ": %{y:.2f} %<extra></extra>"
+                ),
+                customdata=bin_ranges,
+                marker=dict(line=dict(width=0)),
+            )
+        )
 
     # Formatting (Stacked Histogram)
     fig.update_layout(
@@ -477,32 +497,31 @@ def distance_share_dom_int_flights(flights_df, value_watched_flights):
     bins = list(range(0, int(flights_df["distance_km"].max()) + bin_width, bin_width))
     bin_centers = [b + bin_width / 2 for b in bins[:-1]]
 
-    grouped = flights_df.groupby([pd.cut(flights_df["distance_km"], bins), "domestic"])[
-        value_watched_flights].sum().unstack(fill_value=0)
+    grouped = (
+        flights_df.groupby([pd.cut(flights_df["distance_km"], bins), "domestic"])[
+            value_watched_flights
+        ]
+        .sum()
+        .unstack(fill_value=0)
+    )
 
     share_df = grouped.div(grouped.sum(axis=1), axis=0) * 100
 
-    bin_ranges = [
-        f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers
-    ]
+    bin_ranges = [f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers]
 
     for flight_type in share_df.columns:
-        fig.add_trace(go.Bar(
-            x=bin_centers,
-            y=share_df[flight_type],
-            name="Domestic" if flight_type == 1 else "International",
-            width=bin_width,
-            opacity=0.7,
-            hovertemplate=(
-                    "Distance %{customdata} km:<br>" +
-                    "%{y:.2f} %<extra></extra>"
-            ),
-            customdata=bin_ranges,
-            marker=dict(
-                line=dict(width=0)
-            ),
-        ))
-
+        fig.add_trace(
+            go.Bar(
+                x=bin_centers,
+                y=share_df[flight_type],
+                name="Domestic" if flight_type == 1 else "International",
+                width=bin_width,
+                opacity=0.7,
+                hovertemplate=("Distance %{customdata} km:<br>" + "%{y:.2f} %<extra></extra>"),
+                customdata=bin_ranges,
+                marker=dict(line=dict(width=0)),
+            )
+        )
 
     fig.update_layout(
         title=f"Flight type vs flight distance<br>Weighting on: {value_watched_flights}",
@@ -536,7 +555,9 @@ def aircraft_pie_flights(flights_df, value_watched_flights):
         color_discrete_sequence=px.colors.qualitative.T10,
         labels={"names": "Aircraft", "values": value_watched_flights},
     )
-    fig.update_traces(textposition="inside",hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
+    fig.update_traces(
+        textposition="inside", hovertemplate=value_watched_flights + " for %{label}: %{value:.2e}"
+    )
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by aircraft model".format(value_watched_flights),
@@ -557,7 +578,9 @@ def aircraft_user_pie_flights(flights_df, value_watched_flights):
         color_discrete_sequence=px.colors.qualitative.T10,
         labels={"names": "Airline", "values": value_watched_flights},
     )
-    fig.update_traces(textposition="inside",hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
+    fig.update_traces(
+        textposition="inside", hovertemplate=value_watched_flights + " for %{label}: %{value:.2e}"
+    )
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by airline".format(value_watched_flights),
@@ -576,7 +599,9 @@ def aircraft_class_pie_flights(flights_df, value_watched_ctry):
         color_discrete_sequence=px.colors.qualitative.T10,
         labels={"names": "Class", "values": value_watched_ctry},
     )
-    fig.update_traces(textposition="inside", hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
+    fig.update_traces(
+        textposition="inside", hovertemplate=value_watched_flights + " for %{label}: %{value:.2e}"
+    )
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by aircraft class".format(value_watched_ctry),
@@ -595,7 +620,9 @@ def dom_share_pie_flights(flights_df, value_watched_ctry):
         names=df_group.domestic,
         color_discrete_sequence=px.colors.qualitative.T10,
     )
-    fig.update_traces(textposition="inside", hovertemplate = value_watched_flights + " for %{label}: %{value:.2e}")
+    fig.update_traces(
+        textposition="inside", hovertemplate=value_watched_flights + " for %{label}: %{value:.2e}"
+    )
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
         title="{} by type".format(value_watched_ctry),

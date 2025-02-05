@@ -114,9 +114,7 @@ class DetailledTab:
         self._make_layout()
 
     def _make_connections(self, dataclass):
-        self.reset_all_button.on_event(
-            "click", partial(self._reset_all, dataclass=dataclass)
-        )
+        self.reset_all_button.on_event("click", partial(self._reset_all, dataclass=dataclass))
 
         self.departure_airport_autocomplete.observe(
             partial(self._data_update_dep, dataclass=dataclass), names="v_model"
@@ -150,12 +148,8 @@ class DetailledTab:
         self.arrival_airport_autocomplete.items = (
             dataclass.flights_df.iata_arrival.unique().tolist()
         )
-        self.airline_autocomplete.items = (
-            dataclass.flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            dataclass.flights_df.acft_icao.unique().tolist()
-        )
+        self.airline_autocomplete.items = dataclass.flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = dataclass.flights_df.acft_icao.unique().tolist()
 
     def _render_initial_plots(self, dataclass):
         with self.output_1:
@@ -187,9 +181,7 @@ class DetailledTab:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["iata_departure"].isin(
-                    filtered_departure_airport
-                )
+                self.in_class_flights_df["iata_departure"].isin(filtered_departure_airport)
             ].reset_index()
 
         # active arrival filter
@@ -227,9 +219,7 @@ class DetailledTab:
         self.arrival_airport_autocomplete.items = (
             self.in_class_flights_df.iata_arrival.unique().tolist()
         )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -249,9 +239,7 @@ class DetailledTab:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["iata_departure"].isin(
-                    filtered_departure_airport
-                )
+                self.in_class_flights_df["iata_departure"].isin(filtered_departure_airport)
             ].reset_index()
 
         # active arrival filter
@@ -279,9 +267,7 @@ class DetailledTab:
             ].reset_index()
 
         if len(self.aircraft_autocomplete.v_model) == 0:
-            self.aircraft_autocomplete.items = (
-                self.in_class_flights_df.acft_icao.unique().tolist()
-            )
+            self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self.departure_airport_autocomplete.items = (
             self.in_class_flights_df.iata_departure.unique().tolist()
@@ -289,9 +275,7 @@ class DetailledTab:
         self.arrival_airport_autocomplete.items = (
             self.in_class_flights_df.iata_arrival.unique().tolist()
         )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -311,9 +295,7 @@ class DetailledTab:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["iata_departure"].isin(
-                    filtered_departure_airport
-                )
+                self.in_class_flights_df["iata_departure"].isin(filtered_departure_airport)
             ].reset_index()
 
         # active arrival filter
@@ -348,12 +330,8 @@ class DetailledTab:
         self.departure_airport_autocomplete.items = (
             self.in_class_flights_df.iata_departure.unique().tolist()
         )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -373,9 +351,7 @@ class DetailledTab:
             if "level_0" in self.in_class_flights_df.columns:
                 self.in_class_flights_df.drop("level_0", axis=1, inplace=True)
             self.in_class_flights_df = self.in_class_flights_df[
-                self.in_class_flights_df["iata_departure"].isin(
-                    filtered_departure_airport
-                )
+                self.in_class_flights_df["iata_departure"].isin(filtered_departure_airport)
             ].reset_index()
 
         # active arrival filter
@@ -410,12 +386,8 @@ class DetailledTab:
         self.arrival_airport_autocomplete.items = (
             self.in_class_flights_df.iata_arrival.unique().tolist()
         )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -432,9 +404,7 @@ class DetailledTab:
                     # # grouping flighst on and OD basis, and concatenating airline and aircraft information
 
                     flights_df_od = (
-                        self.in_class_flights_df.groupby(
-                            ["iata_departure", "iata_arrival"]
-                        )
+                        self.in_class_flights_df.groupby(["iata_departure", "iata_arrival"])
                         .agg(
                             {
                                 "acft_icao": ", ".join,
@@ -455,9 +425,7 @@ class DetailledTab:
                     flights_df_od["airline_iata"] = flights_df_od["airline_iata"].apply(
                         remove_duplicates
                     )
-                    flights_df_od["acft_icao"] = flights_df_od["acft_icao"].apply(
-                        remove_duplicates
-                    )
+                    flights_df_od["acft_icao"] = flights_df_od["acft_icao"].apply(remove_duplicates)
                     fig_flights_1 = flight_level_plots.flights_map_plot(
                         flights_df_od, value_watched_flights
                     )
@@ -754,9 +722,7 @@ class DetailledTab:
             children=[row_disclaimer, row_mega_map_flights, row_threeplots_flights],
         )
 
-        self.layout = v.Row(
-            children=[col_selects_flights, v_divider, col_plots_flights]
-        )
+        self.layout = v.Row(children=[col_selects_flights, v_divider, col_plots_flights])
 
 
 class DetailledTab_OS:
@@ -866,9 +832,7 @@ class DetailledTab_OS:
         self._make_layout()
 
     def _make_connections(self, dataclass):
-        self.reset_all_button.on_event(
-            "click", partial(self._reset_all, dataclass=dataclass)
-        )
+        self.reset_all_button.on_event("click", partial(self._reset_all, dataclass=dataclass))
 
         self.departure_airport_autocomplete.observe(
             partial(self._data_update_dep, dataclass=dataclass), names="v_model"
@@ -896,18 +860,10 @@ class DetailledTab_OS:
         self.arrival_airport_autocomplete.v_model = list()
         self.airline_autocomplete.v_model = list()
         self.aircraft_autocomplete.v_model = list()
-        self.departure_airport_autocomplete.items = (
-            dataclass.flights_df.origin.unique().tolist()
-        )
-        self.arrival_airport_autocomplete.items = (
-            dataclass.flights_df.dest.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            dataclass.flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            dataclass.flights_df.acft_icao.unique().tolist()
-        )
+        self.departure_airport_autocomplete.items = dataclass.flights_df.origin.unique().tolist()
+        self.arrival_airport_autocomplete.items = dataclass.flights_df.dest.unique().tolist()
+        self.airline_autocomplete.items = dataclass.flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = dataclass.flights_df.acft_icao.unique().tolist()
 
     def _render_initial_plots(self, dataclass):
         with self.output_1:
@@ -974,12 +930,8 @@ class DetailledTab_OS:
         self.departure_airport_autocomplete.items = (
             self.in_class_flights_df.origin.unique().tolist()
         )
-        self.arrival_airport_autocomplete.items = (
-            self.in_class_flights_df.dest.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.arrival_airport_autocomplete.items = self.in_class_flights_df.dest.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -1027,19 +979,13 @@ class DetailledTab_OS:
             ].reset_index()
 
         if len(self.aircraft_autocomplete.v_model) == 0:
-            self.aircraft_autocomplete.items = (
-                self.in_class_flights_df.acft_icao.unique().tolist()
-            )
+            self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self.departure_airport_autocomplete.items = (
             self.in_class_flights_df.origin.unique().tolist()
         )
-        self.arrival_airport_autocomplete.items = (
-            self.in_class_flights_df.dest.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
+        self.arrival_airport_autocomplete.items = self.in_class_flights_df.dest.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -1094,12 +1040,8 @@ class DetailledTab_OS:
         self.departure_airport_autocomplete.items = (
             self.in_class_flights_df.origin.unique().tolist()
         )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -1151,15 +1093,9 @@ class DetailledTab_OS:
                 self.in_class_flights_df.origin.unique().tolist()
             )
 
-        self.arrival_airport_autocomplete.items = (
-            self.in_class_flights_df.dest.unique().tolist()
-        )
-        self.airline_autocomplete.items = (
-            self.in_class_flights_df.airline_iata.unique().tolist()
-        )
-        self.aircraft_autocomplete.items = (
-            self.in_class_flights_df.acft_icao.unique().tolist()
-        )
+        self.arrival_airport_autocomplete.items = self.in_class_flights_df.dest.unique().tolist()
+        self.airline_autocomplete.items = self.in_class_flights_df.airline_iata.unique().tolist()
+        self.aircraft_autocomplete.items = self.in_class_flights_df.acft_icao.unique().tolist()
 
         self._plot1_update(change)
         self._plot2_update(change)
@@ -1198,9 +1134,7 @@ class DetailledTab_OS:
                     flights_df_od["airline_iata"] = flights_df_od["airline_iata"].apply(
                         remove_duplicates
                     )
-                    flights_df_od["acft_icao"] = flights_df_od["acft_icao"].apply(
-                        remove_duplicates
-                    )
+                    flights_df_od["acft_icao"] = flights_df_od["acft_icao"].apply(remove_duplicates)
                     fig_flights_1 = flight_level_plots.flights_map_plot_OS(
                         flights_df_od, value_watched_flights
                     )
@@ -1504,9 +1438,7 @@ class DetailledTab_OS:
             children=[row_disclaimer, row_mega_map_flights, row_threeplots_flights],
         )
 
-        self.layout = v.Row(
-            children=[col_selects_flights, v_divider, col_plots_flights]
-        )
+        self.layout = v.Row(children=[col_selects_flights, v_divider, col_plots_flights])
 
 
 # Function to remove duplicates from a comma-separated string

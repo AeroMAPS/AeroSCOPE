@@ -17,9 +17,7 @@ class Main:
     """
 
     def __init__(self):
-        class _CustomFormatter(
-            RawDescriptionHelpFormatter, ArgumentDefaultsHelpFormatter
-        ):
+        class _CustomFormatter(RawDescriptionHelpFormatter, ArgumentDefaultsHelpFormatter):
             pass
 
         self.parser = ArgumentParser(

@@ -37,9 +37,7 @@ def continental_treemap_plot(continental_flows, value_watched_conti):
         fig.update_layout(margin=dict(l=5, r=5, t=60, b=5))
 
         if value_watched_conti == "CO2 (Mt)":
-            fig.update_traces(
-                hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (Mt)"
-            )
+            fig.update_traces(hovertemplate="Flow=%{id}<br>CO<sub>2</sub>=%{value:.2f} (Mt)")
             fig.update_traces(
                 marker=dict(cornerradius=5),
                 textinfo="label+value+percent entry",
@@ -82,21 +80,26 @@ def distance_histogram_plot_continent(flights_df_conti, value_watched_conti):
         bin_centers = [b + bin_width / 2 for b in bins[:-1]]  # Midpoints of each bin
 
         # Group data by distance bins and arrival continent
-        grouped = flights_df_conti.groupby([pd.cut(flights_df_conti["distance_km"], bins), "arrival_continent"])[
-            value_watched_conti].sum().unstack(fill_value=0)
+        grouped = (
+            flights_df_conti.groupby(
+                [pd.cut(flights_df_conti["distance_km"], bins), "arrival_continent"]
+            )[value_watched_conti]
+            .sum()
+            .unstack(fill_value=0)
+        )
 
         # Add traces for each arrival continent (stacked bars)
         for continent in grouped.columns:
-            fig.add_trace(go.Bar(
-                x=bin_centers,  # Center bars on bins
-                y=grouped[continent],
-                name=continent,
-                width=bin_width,
-                marker_color=color_discrete_map[continent],  # Default color if not mapped
-                hovertemplate=(
-                    value_watched_conti + ": %{y:.2f}<br>"
-                ),
-            ))
+            fig.add_trace(
+                go.Bar(
+                    x=bin_centers,  # Center bars on bins
+                    y=grouped[continent],
+                    name=continent,
+                    width=bin_width,
+                    marker_color=color_discrete_map[continent],  # Default color if not mapped
+                    hovertemplate=(value_watched_conti + ": %{y:.2f}<br>"),
+                )
+            )
 
         # Formatting (Stacked Histogram)
         fig.update_layout(

@@ -252,33 +252,23 @@ class Simulator(v.Card):
                     ),
                     # Darken text color for active tab
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[continental_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[continental_tab.layout])],
                         style_="background-color: white;",
                     ),
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[countries_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[countries_tab.layout])],
                         style_="background-color: white;",
                     ),
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[detailled_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[detailled_tab.layout])],
                         style_="background-color: white;",
                     ),
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[passenger_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[passenger_tab.layout])],
                         style_="background-color: white;",
                     ),
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[aeromaps_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[aeromaps_tab.layout])],
                         style_="background-color: white;",
                     ),
                 ],
@@ -303,15 +293,11 @@ class Simulator(v.Card):
                         active_class="teal--text text--lighten-1",
                     ),
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[countries_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[countries_tab.layout])],
                         style_="background-color: white;",
                     ),
                     v.TabItem(
-                        children=[
-                            v.Container(fluid=True, children=[detailled_tab.layout])
-                        ],
+                        children=[v.Container(fluid=True, children=[detailled_tab.layout])],
                         style_="background-color: white;",
                     ),
                 ],

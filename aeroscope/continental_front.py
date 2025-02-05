@@ -109,9 +109,7 @@ class ContinentalTab:
     def _make_connections(self, dataclass):
         # # Connect the event handler to the controls
 
-        self.select.observe(
-            partial(self._plots_update, dataclass=dataclass), names="v_model"
-        )
+        self.select.observe(partial(self._plots_update, dataclass=dataclass), names="v_model")
         self.value_watched_radio.observe(
             partial(self._plots_update, dataclass=dataclass), names="v_model"
         )
@@ -152,9 +150,7 @@ class ContinentalTab:
                             children=[
                                 v.CardText(
                                     children=[
-                                        v.CardTitle(
-                                            children="Select 'departure' continents"
-                                        ),
+                                        v.CardTitle(children="Select 'departure' continents"),
                                         self.select,
                                     ]
                                 ),

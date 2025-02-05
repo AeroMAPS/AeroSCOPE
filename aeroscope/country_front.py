@@ -106,15 +106,9 @@ class CountriesTab:
         self.autocomplete.observe(self._select_regional, names="v_model")
 
         # TODO +++ change the filtering logic: decoupling from plot switch to avoid unnecessary operations!
-        self.autocomplete.observe(
-            partial(self._plot1_update, dataclass=dataclass), names="v_model"
-        )
-        self.autocomplete.observe(
-            partial(self._plot2_update, dataclass=dataclass), names="v_model"
-        )
-        self.autocomplete.observe(
-            partial(self._plot3_update, dataclass=dataclass), names="v_model"
-        )
+        self.autocomplete.observe(partial(self._plot1_update, dataclass=dataclass), names="v_model")
+        self.autocomplete.observe(partial(self._plot2_update, dataclass=dataclass), names="v_model")
+        self.autocomplete.observe(partial(self._plot3_update, dataclass=dataclass), names="v_model")
 
         self.value_watched_radio.observe(
             partial(self._plot1_update, dataclass=dataclass), names="v_model"
@@ -208,8 +202,8 @@ class CountriesTab:
                     "Slovakia (Slovak Republic)",
                     "Slovenia, Republic of",
                     "Spain, Kingdom of",
-                    "Sweden, Kingdom of","Saint Martin"
-
+                    "Sweden, Kingdom of",
+                    "Saint Martin",
                 ]
             )
         if "France + Overseas" in selected_countries:
@@ -385,9 +379,7 @@ class CountriesTab:
             display(fig_ctry_2)
 
         with self.output_3:
-            fig_ctry_3 = country_level_plots.aircraft_pie(
-                dataclass.flights_df, init_value
-            )
+            fig_ctry_3 = country_level_plots.aircraft_pie(dataclass.flights_df, init_value)
             display(fig_ctry_3)
 
     # TODO like flight plot split updates between data and plot
@@ -567,9 +559,7 @@ class CountriesTab:
                             children=[
                                 v.CardText(
                                     children=[
-                                        v.CardTitle(
-                                            children="Departure countries filter"
-                                        ),
+                                        v.CardTitle(children="Departure countries filter"),
                                         self.autocomplete,
                                         self.select_world_button,
                                     ]
