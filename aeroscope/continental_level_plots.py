@@ -113,6 +113,7 @@ def distance_histogram_plot_continent(flights_df_conti, value_watched_conti):
             ),
             legend_title="Arrival Continent",
             legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
+            margin=dict(l=60, r=60, t=60, b=60),
         )
 
         return fig

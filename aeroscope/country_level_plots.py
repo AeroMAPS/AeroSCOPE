@@ -249,7 +249,7 @@ def distance_share_country(flights_df, value_watched_ctry):
         template="plotly_white",
         hovermode="closest",
         barmode="stack",  # Stacked histogram style
-        yaxis=dict(tickformat=".0f", range=[0, 100]),  # Ensure % scaling
+        yaxis=dict(tickformat=".0f", range=[0, 100]),
         xaxis=dict(
             tickmode="linear",
             dtick=bin_width,
@@ -258,6 +258,7 @@ def distance_share_country(flights_df, value_watched_ctry):
         ),
         legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
         colorway=px.colors.qualitative.T10,
+        margin=dict(l=60, r=60, t=60, b=60),
     )
 
     return fig
@@ -314,6 +315,7 @@ def distance_share_dom_int_country(flights_df, value_watched_ctry):
         legend_title="Flight Type",
         legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
         colorway=px.colors.qualitative.T10,
+        margin=dict(l=60, r=60, t=60, b=60),
     )
 
     return fig
@@ -429,6 +431,7 @@ def distance_histogram_plot_country(flights_df, value_watched_ctry):
             dtick=bin_width,
             range=[0, bins[-1]],
         ),
+        margin=dict(l=60, r=60, t=60, b=60),
     )
 
     return fig
