@@ -1,4 +1,11 @@
 # Changelog
+## Version 0.2.4-beta
+*What's Changed*
+- New formatting and test stadards
+- Conversion of all plots that were using Seaborn/Matplotlib environment to Plotly 
+- New units formatting: scientific notation instead of hard to read floats
+
+
 ## Version 0.2.3-beta 
 *What's Changed*
 - Added energy per ASK on export table by @antSGS in https://github.com/AeroMAPS/AeroSCOPE/pull/14
