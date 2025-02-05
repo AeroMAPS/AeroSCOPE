@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=https://github.com/AeroMAPS/AeroSCOPE/assets/97613437/1824dcdd-1c25-489c-96e0-4897a0773b7c />
+  <img src=https://github.com/AeroMAPS/AeroSCOPE/blob/main/aeroscope/logo/aeroscope.png />
 </p>
 
 [![image](https://img.shields.io/pypi/v/aeroscope.svg)](https://pypi.python.org/pypi/aeroscope)
