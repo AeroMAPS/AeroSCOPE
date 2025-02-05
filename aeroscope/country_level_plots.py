@@ -5,8 +5,6 @@
 
 import plotly.express as px
 import plotly.graph_objects as go
-import seaborn as sns
-import matplotlib.pyplot as plt
 import pandas as pd
 
 
@@ -103,24 +101,6 @@ def countries_map_plot(country_flows, value_watched_ctry):
     return fig
 
 
-### Deprecated, too slow
-
-# def distance_ecdf_plot_country(flights_df):
-#     sns.set_style("darkgrid")
-#     # Create a new figure with a single subplot
-#     fig, ax = plt.subplots(figsize=(5,5))
-#     sns.ecdfplot(flights_df, x='distance_km', weights='Seats', label='Seats',stat='percent', ax=ax)
-#     sns.ecdfplot(flights_df, x='distance_km', weights='ASK', label= 'ASK', stat='percent',ax=ax)
-#     sns.ecdfplot(flights_df, x='distance_km', weights='CO2 (kg)', label= '$\mathregular{CO_2}$',stat='percent', ax=ax)
-
-#     ax.legend()
-
-#     # Set the title, x-axis label, and y-axis label
-#     ax.set_title("Metrics cumulative distribution vs flight distance")
-#     ax.set_xlabel("Distance (km)")
-#     ax.set_ylabel("Cumulative distribution (%)")
-
-#     return fig
 
 
 def formatter(x, pos):
@@ -403,65 +383,6 @@ def countries_treemap_plot(country_flows, value_watched_ctry):
         fig.update_traces(hovertemplate="Flow=%{id}<br>Flights=%{value:.2e}")
 
     return fig
-
-
-#### Deprecated version, too slow
-# def distance_histogram_plot_country(flights_df, value_watched_ctry):
-#     fig = px.histogram(
-#         flights_df,
-#         x="distance_km",
-#         y=value_watched_ctry,
-#         histfunc="sum",
-#         color_discrete_sequence=px.colors.qualitative.T10,
-#         title='Repartition of {} by flight distance'.format(value_watched_ctry),
-
-#     )
-
-#     fig.update_traces(xbins=dict(
-#         start=0.0,
-#         end=flights_df.distance_km.max(),
-#         size=500))
-
-#     fig.update_layout(
-#         # title="Histogram of CO2 Emissions by Distance and Arrival Continent",
-#         xaxis_title="Distance (km)",
-#         yaxis_title=value_watched_ctry,
-#         showlegend=False,
-#     )
-
-#     fig.update_layout(
-#         margin=dict(l=5, r=5, t=60, b=5),
-#     )
-
-#     if value_watched_ctry == 'CO2 (kg)':
-#         fig.update_traces(hovertemplate='Distance group (km)=%{x}<br>CO2 (kg)=%{y:.0f}<extra></extra>')
-#     elif value_watched_ctry == 'ASK':
-#         fig.update_traces(hovertemplate='Distance group (km)=%{x}<br>ASK=%{y:.0f}<extra></extra>')
-#     elif value_watched_ctry == 'Seats':
-#         fig.update_traces(hovertemplate='Distance group (km)=%{x}<br>Seats=%{y:.0f}<extra></extra>')
-#     return fig
-
-
-def distance_histogram_plot_country(flights_df, value_watched_ctry):
-    sns.set_style("darkgrid")
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.histplot(
-        data=flights_df,
-        x="distance_km",
-        weights=value_watched_ctry,
-        common_norm=False,
-        element="step",
-        color="#EE9B00",
-        bins=range(0, int(flights_df["distance_km"].max()) + 500, 500),
-        ax=ax,
-        alpha=0.5,
-    )
-    ax.set_title("Repartition of {} by flight distance".format(value_watched_ctry))
-    ax.set_xlabel("Distance (km)")
-    ax.set_ylabel(value_watched_ctry)
-    return fig
-
 
 
 
