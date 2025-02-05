@@ -6,9 +6,7 @@
 
 import plotly.express as px
 import plotly.graph_objects as go
-import seaborn as sns
-import matplotlib.pyplot as plt
-
+import pandas as pd
 
 color_discrete_map = {
     "AS": "#EE9B00",
@@ -74,83 +72,51 @@ def continental_treemap_plot(continental_flows, value_watched_conti):
         return "Please select at least one continent!"
 
 
-### plotly histogramm deprecated, too slow
-
-# def distance_histogram_plot_continent(flights_df_conti, value_watched_conti):
-#     if len(flights_df_conti)>0:
-#         fig = px.histogram(
-#             flights_df_conti,
-#             x="distance_km",
-#             y=value_watched_conti,
-#             color="arrival_continent",
-#             color_discrete_map=color_discrete_map,
-#             title='Repartition of {} by flight distance'.format(value_watched_conti),
-#             histfunc="sum",
-#         )
-
-#         fig.update_traces(xbins=dict(
-#             start=0.0,
-#             end=flights_df_conti.distance_km.max(),
-#             size=500))
-
-#         fig.update_layout(
-#             # title="Histogram of CO2 Emissions by Distance and Arrival Continent",
-#             xaxis_title="Distance (km)",
-#             yaxis_title=value_watched_conti,
-#             legend_title="Arrival Continent",
-#             showlegend=True,
-#         )
-#         fig.update_layout(
-#             margin=dict(l=5, r=5, t=60, b=5),
-#             legend=dict(
-#                 yanchor="top",
-#                 xanchor="right",
-#                 x=0.9,
-#                 bgcolor='rgba(220, 220, 220, 0.7)'
-#             )
-#         )
-
-#         fig.update_layout()
-#         if value_watched_conti == 'CO2 (Mt)':
-#             fig.update_traces(
-#                 hovertemplate='Arrival Continent=%{customdata}<br>Distance group (km)=%{x}<br>CO2 (Mt)=%{y:.2f}<extra></extra>',
-#                 customdata=flights_df_conti['arrival_continent_name'])
-#         elif value_watched_conti == 'ASK (Bn)':
-#             fig.update_traces(
-#                 hovertemplate='Arrival Continent=%{customdata}<br>Distance group (km)=%{x}<br>ASK (Bn)=%{y:.2f}<extra></extra>',
-#                 customdata=flights_df_conti['arrival_continent_name'])
-#         elif value_watched_conti == 'Seats (Mn)':
-#             fig.update_traces(
-#                 hovertemplate='Arrival Continent=%{customdata}<br>Distance group (km)=%{x}<br>Seats (Mn)=%{y:.2f}<extra></extra>',
-#                 customdata=flights_df_conti['arrival_continent_name'])
-
-#         return fig
-#     else:
-#         return('Please select at least one continent!')
-
-
 def distance_histogram_plot_continent(flights_df_conti, value_watched_conti):
-    plt.ioff()
     if len(flights_df_conti) > 0:
-        sns.set_style("darkgrid")
-        fig, ax = plt.subplots(figsize=(10, 6.5))
-        sns.histplot(
-            data=flights_df_conti,
-            x="distance_km",
-            weights=value_watched_conti,
-            hue="arrival_continent",
-            element="step",
-            multiple="stack",
-            palette=color_discrete_map,
-            common_norm=False,
-            bins=range(0, int(flights_df_conti["distance_km"].max()) + 500, 500),
-            alpha=1,
-            ax=ax,
+        fig = go.Figure()
+
+        # Define bins (500 km intervals)
+        bin_width = 500
+        bins = list(range(0, int(flights_df_conti["distance_km"].max()) + bin_width, bin_width))
+        bin_centers = [b + bin_width / 2 for b in bins[:-1]]  # Midpoints of each bin
+
+        # Group data by distance bins and arrival continent
+        grouped = flights_df_conti.groupby([pd.cut(flights_df_conti["distance_km"], bins), "arrival_continent"])[
+            value_watched_conti].sum().unstack(fill_value=0)
+
+        # Add traces for each arrival continent (stacked bars)
+        for continent in grouped.columns:
+            fig.add_trace(go.Bar(
+                x=bin_centers,  # Center bars on bins
+                y=grouped[continent],
+                name=continent,
+                width=bin_width,
+                marker_color=color_discrete_map[continent],  # Default color if not mapped
+                hovertemplate=(
+                    value_watched_conti + ": %{y:.2f}<br>"
+                ),
+            ))
+
+        # Formatting (Stacked Histogram)
+        fig.update_layout(
+            title=f"Repartition of {value_watched_conti} by flight distance and arrival continent",
+            xaxis_title="Distance (km)",
+            yaxis_title=value_watched_conti,
+            template="plotly_white",
+            hovermode="x",
+            barmode="stack",  # Stacked histogram
+            xaxis=dict(
+                tickmode="linear",
+                dtick=bin_width,
+                range=[0, bins[-1]],
+            ),
+            legend_title="Arrival Continent",
+            legend=dict(x=0.82, y=0.08, bgcolor="rgba(255, 255, 255, 0.5)"),
         )
-        ax.set_title("Repartition of {} by flight distance".format(value_watched_conti))
-        ax.set_xlabel("Distance (km)")
-        ax.set_ylabel(value_watched_conti)
+
         return fig
+
     else:
         print("Please select at least one continent!")
         return

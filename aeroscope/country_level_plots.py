@@ -323,7 +323,7 @@ def distance_share_dom_int_country(flights_df, value_watched_ctry):
         xaxis_title="Distance (km)",
         yaxis_title="Flight type distribution (%)",
         template="plotly_white",
-        hovermode="closest",
+        hovermode="x",
         barmode="stack",
         yaxis=dict(tickformat=".0f", range=[0, 100]),  # Ensure % scaling
         xaxis=dict(
