@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aeroscope"
-version = "0.2.3-beta" # This is directly modified by the poetry dynamic versioning
+version = "0.2.4-beta" # This is directly modified by the poetry dynamic versioning
 description = "AeroSCOPE: Exploring Aviation Flows"
 readme = "README.md"
 authors = [
@@ -50,6 +50,11 @@ ruff = "0.5.4"
 
 [tool.poetry.scripts]
     aeroscope = "aeroscope.app:main"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
 
 [tool.ruff]
 line-length = 100
