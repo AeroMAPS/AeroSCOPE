@@ -51,6 +51,11 @@ ruff = "0.5.4"
 [tool.poetry.scripts]
     aeroscope = "aeroscope.app:main"
 
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+
 [tool.ruff]
 line-length = 100
 target-version = "py39"
