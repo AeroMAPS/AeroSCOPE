@@ -591,20 +591,20 @@ def aircraft_user_pie_flights(flights_df, value_watched_flights):
     return fig
 
 
-def aircraft_class_pie_flights(flights_df, value_watched_ctry):
-    aircraft_class = flights_df.groupby("acft_class")[value_watched_ctry].sum()
+def aircraft_class_pie_flights(flights_df, value_watched_flights):
+    aircraft_class = flights_df.groupby("acft_class")[value_watched_flights].sum()
     fig = px.pie(
         values=aircraft_class,
         names=aircraft_class.index,
         color_discrete_sequence=px.colors.qualitative.T10,
-        labels={"names": "Class", "values": value_watched_ctry},
+        labels={"names": "Class", "values": value_watched_flights},
     )
     fig.update_traces(
         textposition="inside", hovertemplate=value_watched_flights + " for %{label}: %{value:.2e}"
     )
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
-        title="{} by aircraft class".format(value_watched_ctry),
+        title="{} by aircraft class".format(value_watched_flights),
         legend=dict(
             title="Aircraft class:",
         ),
@@ -612,11 +612,11 @@ def aircraft_class_pie_flights(flights_df, value_watched_ctry):
     return fig
 
 
-def dom_share_pie_flights(flights_df, value_watched_ctry):
-    df_group = flights_df.groupby("domestic")[value_watched_ctry].sum().reset_index()
+def dom_share_pie_flights(flights_df, value_watched_flights):
+    df_group = flights_df.groupby("domestic")[value_watched_flights].sum().reset_index()
     df_group["domestic"] = df_group["domestic"].replace(0, "International").replace(1, "Domestic")
     fig = px.pie(
-        values=df_group[value_watched_ctry],
+        values=df_group[value_watched_flights],
         names=df_group.domestic,
         color_discrete_sequence=px.colors.qualitative.T10,
     )
@@ -625,7 +625,7 @@ def dom_share_pie_flights(flights_df, value_watched_ctry):
     )
     fig.update_layout(
         margin=dict(l=60, r=60, t=60, b=60),
-        title="{} by type".format(value_watched_ctry),
+        title="{} by type".format(value_watched_flights),
         legend=dict(
             title="Flight type:",
         ),
