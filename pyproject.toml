@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aeroscope"
-version = "0.2.3-beta" # This is directly modified by the poetry dynamic versioning
+version = "0.2.4-beta" # This is directly modified by the poetry dynamic versioning
 description = "AeroSCOPE: Exploring Aviation Flows"
 readme = "README.md"
 authors = [
