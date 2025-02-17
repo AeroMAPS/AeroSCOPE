@@ -1,4 +1,10 @@
 # Changelog
+## Version 0.2.5-beta
+*What's Changed*
+- Fixed bug on detailed level pie plots introduced involuntarily with the previous release
+- Fixed computation error for CO2 per passenger in Passenger mode
+
+
 ## Version 0.2.4-beta
 *What's Changed*
 - New formatting and test stadards
