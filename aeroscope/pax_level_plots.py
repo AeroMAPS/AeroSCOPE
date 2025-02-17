@@ -12,7 +12,7 @@ def pax_map_plot(flights_gpb_df):
 
     fig = go.Figure()
 
-    meanwidth = flights_gpb_df["CO2 Ppax"].mean()
+    meanwidth = flights_gpb_df["Pax CO2"].mean()
 
     for i in range(len(flights_gpb_df)):
         fig.add_trace(
@@ -27,7 +27,7 @@ def pax_map_plot(flights_gpb_df):
                 ],
                 mode="lines",
                 line=dict(
-                    width=flights_gpb_df["CO2 Ppax"][i] / (1.5 * meanwidth),
+                    width=flights_gpb_df["Pax CO2"][i] / (1.5 * meanwidth),
                     color="#023047",
                 ),
                 opacity=0.8,
@@ -39,10 +39,10 @@ def pax_map_plot(flights_gpb_df):
             lon=flights_gpb_df["arrival_lon"],
             lat=flights_gpb_df["arrival_lat"],
             hoverinfo="text",
-            text=flights_gpb_df["CO2 Ppax"],
+            text=flights_gpb_df["Pax CO2"],
             mode="markers",
             marker=dict(
-                size=flights_gpb_df["CO2 Ppax"] / (0.01 * flights_gpb_df["CO2 Ppax"].mean()),
+                size=flights_gpb_df["Pax CO2"] / (0.01 * flights_gpb_df["Pax CO2"].mean()),
                 color="#ffb703",
                 sizemode="area",
                 opacity=0.8,
@@ -51,7 +51,7 @@ def pax_map_plot(flights_gpb_df):
             customdata=flights_gpb_df["iata_arrival"],
             hovertemplate="Flights to: "
             + "%{customdata}<br>"
-            + "CO2 Ppax"
+            + "Pax CO2"
             + ": %{text:.0f}"
             + " (kg)<br>"
             + "<extra></extra>",
@@ -62,7 +62,7 @@ def pax_map_plot(flights_gpb_df):
     fig.update_layout(
         showlegend=False,
         height=800,
-        title="Route values for {}".format("CO2 Ppax (kg)"),
+        title="Route values for {}".format("Pax CO2 (kg)"),
     )
     fig.update_layout(margin=dict(l=5, r=5, t=60, b=5))  # Adjust layout margins and padding
     return fig

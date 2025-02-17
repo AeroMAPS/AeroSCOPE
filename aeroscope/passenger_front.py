@@ -54,9 +54,6 @@ class PassengerTab:
             ].reset_index()
             with self.output_1:
                 self.output_1.clear_output(wait=True)
-                filtered_flights_df = filtered_flights_df[
-                    ~filtered_flights_df["CO2 Ppax"].isin([0, np.nan, np.inf, -np.inf])
-                ]
                 flights_df_od = (
                     filtered_flights_df.groupby(["iata_departure", "iata_arrival"])
                     .agg(
@@ -67,15 +64,19 @@ class PassengerTab:
                             "departure_lat": "first",
                             "arrival_lon": "first",
                             "arrival_lat": "first",
-                            "CO2 Ppax": "mean",
+                            "CO2 (kg)": "sum",
                             "Seats": "sum",
                         }
                     )
                     .reset_index()
                 )
 
-                # Remove flights if not enough seats for this mode (avoid exotic routes)
+                # Remove flights if not enough seats for this mode (avoid exotic routes with potential business jets)
                 flights_df_od = flights_df_od[flights_df_od["Seats"] > 20000].reset_index()
+
+                # Compute CO2 per passenger
+                flights_df_od["Pax CO2"] = flights_df_od["CO2 (kg)"] / flights_df_od["Seats"]
+
                 # Apply the function to the DataFrame column
                 flights_df_od["airline_iata"] = flights_df_od["airline_iata"].apply(
                     remove_duplicates
