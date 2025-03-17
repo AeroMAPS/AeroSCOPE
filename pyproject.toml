@@ -27,7 +27,7 @@ ipywidgets = "^8.1.1"
 matplotlib = "^3.6.2"
 ipyvuetify = "^1.8.10"
 jupyterlab = "^3.6.1"
-voila =  "0.4.0"
+voila =  "^0.4.0"
 voila-vuetify = "0.6.0"
 docutils = "^0.17.1"
 
