@@ -1,0 +1,7 @@
+.git
+.github
+.pytest_cache
+.vscode
+tests
+**/.ipynb_checkpoints
+**/__pycache__
