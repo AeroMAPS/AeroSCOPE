@@ -19,13 +19,17 @@ AeroSCOPE is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.e
 
 ## Setup - app only  
 
-It is suggested to use a new [conda](https://docs.conda.io/en/latest/miniconda.html) virtual environment to install the required packages.
-Python 3.10 is recommended, although older versions may work.
-
-In the new virtual environment, navigate to the project folder. Most installations are done using poetry, except for poetry itself, which can be installed using pip or conda.
+AeroSCOPE needs Python 3.10 to 3.14. Install it in a new virtual environment:
 
 ```bash
 pip install aeroscope
+```
+
+To work on the code, clone the repository and let [uv](https://docs.astral.sh/uv/) create the environment from `uv.lock`:
+
+```bash
+uv sync
+uv run aeroscope run
 ```
 
 ## Usage
