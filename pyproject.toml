@@ -8,7 +8,7 @@ authors = [
     { name = "Scott DELBECQ", email = "scott.delbecq@isae-supaero.fr" },
     { name = "Thomas PLANES", email = "thomas.planes@isae-supaero.fr" },
 ]
-requires-python = ">=3.8, <3.12"
+requires-python = ">=3.10, <3.12"
 readme = "README.md"
 license = "GPL-3.0-only"
 keywords = [
@@ -78,7 +78,7 @@ include = ["aeroscope*"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py39"
+target-version = "py310"
 extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
