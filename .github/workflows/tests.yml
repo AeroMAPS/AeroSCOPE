@@ -8,8 +8,6 @@ on:
       - '**'
     tags-ignore:
       - '**'
-  pull_request:
-    branches: [ 'main' ]
 
 jobs:
   tests:
@@ -17,8 +15,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ '3.10', '3.12', '3.14' ]
-        # Actions minutes are scarce: pushes run on Linux only, pull requests to main on all OSes.
-        os: ${{ fromJson(github.event_name == 'pull_request' && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
       - uses: actions/checkout@v4
