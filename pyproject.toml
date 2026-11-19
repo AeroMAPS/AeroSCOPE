@@ -17,8 +17,8 @@ keywords = [
     "fligh emissions",
 ]
 dependencies = [
-    "numpy>=1.23,<2",
-    "pandas>=1.5,<2",
+    "numpy>=1.23,<3",
+    "pandas>=2.1,<3",
     "ipython>=8.8.0,<9",
     "plotly>=5.16.1,<6",
     "ipywidgets>=8.1.1,<9",
