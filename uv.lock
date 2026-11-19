@@ -23,7 +23,6 @@ dependencies = [
     { name = "pandas" },
     { name = "plotly" },
     { name = "voila" },
-    { name = "voila-vuetify" },
 ]
 
 [package.dev-dependencies]
@@ -58,7 +57,6 @@ requires-dist = [
     { name = "pandas", specifier = ">=2.1,<3" },
     { name = "plotly", specifier = ">=5.16.1,<6" },
     { name = "voila", specifier = ">=0.4.0,<0.5" },
-    { name = "voila-vuetify", specifier = "==0.6.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -2640,18 +2638,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b2/4d/9e1499271b767ce10841cbcec56a44cf3ebd611133811438ee885fc625a7/voila-0.4.6.tar.gz", hash = "sha256:1dbca66019d84e0ec24696b715ca16b447bf479b99b7ff83c5f778c55f2284f6", size = 3310092, upload-time = "2024-10-09T22:15:34.231Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3a/76/a1124c4879c139e26423d92901ec1603322993209e7cbf723d18ba9c589c/voila-0.4.6-py3-none-any.whl", hash = "sha256:830f8d874e9085fda6335e1b9dd1179fc478c8d635a6e9ad7fc8389393aec3c4", size = 2292746, upload-time = "2024-10-09T22:15:31.689Z" },
-]
-
-[[package]]
-name = "voila-vuetify"
-version = "0.6.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "voila" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/96/15/9aabf3307bde991b7e450f6b715e3822e518d4043a4e125e724e1443cc73/voila-vuetify-0.6.0.tar.gz", hash = "sha256:c7fa908de4c026436608afabde98abdc570aba4cf3396de48216792f3b38640c", size = 11708, upload-time = "2022-11-11T09:49:05.957Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/65/40/11dbddeb383f23c081605679f5cb9339bb73675d6fdaa2cd8e7b770b89a3/voila_vuetify-0.6.0-py2.py3-none-any.whl", hash = "sha256:769d4dd75ecb73fd824d5a3994956f7906bb2e288277f7b979563a35b77d553e", size = 22584, upload-time = "2022-11-11T09:49:03.501Z" },
 ]
 
 [[package]]
