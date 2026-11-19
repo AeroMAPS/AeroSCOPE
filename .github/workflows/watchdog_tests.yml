@@ -3,13 +3,8 @@ name: watchdog-tests
 on:
   workflow_dispatch:
   workflow_call:
-  push:
-    branches: [ 'main', 'main-v*' ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ 'main', 'main-v*' ]
   schedule:
-    - cron: '00 4 * * *'
+    - cron: '0 4 * * 1'   # Monday 04:00 UTC
 
 jobs:
   tests:
