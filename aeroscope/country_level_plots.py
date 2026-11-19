@@ -115,7 +115,7 @@ def distance_cumul_plot_country(flights_df):
     # Cumulative distributions for each metric
     # Seats
     hist_seats, edges_seats = (
-        flights_df["Seats"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        flights_df["Seats"].groupby(pd.cut(flights_df["distance_km"], bins), observed=False).sum(),
         bins[1:],
     )
     hist_cumul_seats = hist_seats.cumsum() / hist_seats.sum() * 100
@@ -132,7 +132,7 @@ def distance_cumul_plot_country(flights_df):
 
     # ASK
     hist_ask, edges_ask = (
-        flights_df["ASK"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        flights_df["ASK"].groupby(pd.cut(flights_df["distance_km"], bins), observed=False).sum(),
         bins[1:],
     )
     hist_cumul_ask = hist_ask.cumsum() / hist_ask.sum() * 100
@@ -149,7 +149,9 @@ def distance_cumul_plot_country(flights_df):
 
     #  CO2
     hist_co2, edges_co2 = (
-        flights_df["CO2 (kg)"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        flights_df["CO2 (kg)"]
+        .groupby(pd.cut(flights_df["distance_km"], bins), observed=False)
+        .sum(),
         bins[1:],
     )
     hist_cumul_co2 = hist_co2.cumsum() / hist_co2.sum() * 100
@@ -191,7 +193,9 @@ def distance_cumul_plot_country_OS(flights_df):
     # Cumulative distributions for each metric
     # N Flights
     hist_flights, edges_flights = (
-        flights_df["n_flights"].groupby(pd.cut(flights_df["distance_km"], bins)).sum(),
+        flights_df["n_flights"]
+        .groupby(pd.cut(flights_df["distance_km"], bins), observed=False)
+        .sum(),
         bins[1:],
     )
     hist_cumul_flights = hist_flights.cumsum() / hist_flights.sum() * 100
@@ -234,9 +238,9 @@ def distance_share_country(flights_df, value_watched_ctry):
 
     # Compute shares without modifying flights_df
     grouped = (
-        flights_df.groupby([pd.cut(flights_df["distance_km"], bins, right=False), "acft_class"])[
-            value_watched_ctry
-        ]
+        flights_df.groupby(
+            [pd.cut(flights_df["distance_km"], bins, right=False), "acft_class"], observed=False
+        )[value_watched_ctry]
         .sum()
         .unstack(fill_value=0)
     )
@@ -295,7 +299,7 @@ def distance_share_dom_int_country(flights_df, value_watched_ctry):
     bin_centers = [b + bin_width / 2 for b in bins[:-1]]
 
     grouped = (
-        flights_df.groupby([pd.cut(flights_df["distance_km"], bins), "domestic"])[
+        flights_df.groupby([pd.cut(flights_df["distance_km"], bins), "domestic"], observed=False)[
             value_watched_ctry
         ]
         .sum()
@@ -418,7 +422,9 @@ def distance_histogram_plot_country(flights_df, value_watched_ctry):
     bin_ranges = [f"{b - bin_width / 2}-{b + bin_width / 2}" for b in bin_centers]
 
     # Compute the sum of values in each bin
-    grouped = flights_df.groupby(pd.cut(flights_df["distance_km"], bins))[value_watched_ctry].sum()
+    grouped = flights_df.groupby(pd.cut(flights_df["distance_km"], bins), observed=False)[
+        value_watched_ctry
+    ].sum()
 
     # Add bars for the histogram
     fig.add_trace(

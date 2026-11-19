@@ -82,7 +82,7 @@ def distance_histogram_plot_continent(flights_df_conti, value_watched_conti):
         # Group data by distance bins and arrival continent
         grouped = (
             flights_df_conti.groupby(
-                [pd.cut(flights_df_conti["distance_km"], bins), "arrival_continent"]
+                [pd.cut(flights_df_conti["distance_km"], bins), "arrival_continent"], observed=False
             )[value_watched_conti]
             .sum()
             .unstack(fill_value=0)
