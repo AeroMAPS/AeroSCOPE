@@ -4,3 +4,8 @@
 /aeroscope/graphs/
 /aeroscope/data/.ipynb_checkpoints/
 /aeroscope/.ipynb_checkpoints/
+
+# Packaging
+*.egg-info/
+/build/
+/dist/
