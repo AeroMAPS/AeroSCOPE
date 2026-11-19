@@ -5,7 +5,7 @@
 # docker-compose.prod.yml in AeroMAPS_App, which builds this file and overrides
 # the CMD below to serve the notebook under /aeroscope/.
 
-FROM python:3.10-slim-bookworm
+FROM python:3.13-slim-trixie
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
