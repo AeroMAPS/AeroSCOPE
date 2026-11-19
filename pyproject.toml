@@ -1,60 +1,80 @@
-[tool.poetry]
+[project]
 name = "aeroscope"
-version = "0.2.5-beta" # This is directly modified by the poetry dynamic versioning
+dynamic = ["version"]
 description = "AeroSCOPE: Exploring Aviation Flows"
-readme = "README.md"
 authors = [
-    "Antoine SALGAS <antoine.salgas@isae-supaero.fr>",
-    "Junzi SUN <j.sun-1@tudelft.nl>",
-    "Scott DELBECQ <scott.delbecq@isae-supaero.fr>",
-    "Thomas PLANES <thomas.planes@isae-supaero.fr>",
+    { name = "Antoine SALGAS", email = "antoine.salgas@isae-supaero.fr" },
+    { name = "Junzi SUN", email = "j.sun-1@tudelft.nl" },
+    { name = "Scott DELBECQ", email = "scott.delbecq@isae-supaero.fr" },
+    { name = "Thomas PLANES", email = "thomas.planes@isae-supaero.fr" },
 ]
+requires-python = ">=3.8, <3.12"
+readme = "README.md"
+license = "GPL-3.0-only"
 keywords = [
     "air transport",
     "flight data",
     "fligh emissions",
 ]
-license = "GPL-3.0-only"
-homepage = "https://github.com/AeroMAPS/AeroSCOPE"
+dependencies = [
+    "numpy>=1.23,<2",
+    "pandas>=1.5,<2",
+    "ipython>=8.8.0,<9",
+    "plotly>=5.16.1,<6",
+    "ipywidgets>=8.1.1,<9",
+    "matplotlib>=3.6.2,<4",
+    "ipyvuetify>=1.8.10,<2",
+    "jupyterlab>=3.6.1,<4",
+    "voila>=0.4.0,<0.5",
+    "voila-vuetify==0.6.0",
+    "docutils>=0.17.1,<0.18",
+]
 
-[tool.poetry.dependencies]
-python = "^3.8, <3.12"
-numpy = "^1.23"
-pandas = "^1.5"
-ipython = "^8.8.0"
-plotly = "^5.16.1"
-ipywidgets = "^8.1.1"
-matplotlib = "^3.6.2"
-ipyvuetify = "^1.8.10"
-jupyterlab = "^3.6.1"
-voila =  "^0.4.0"
-voila-vuetify = "0.6.0"
-docutils = "^0.17.1"
+[project.urls]
+Homepage = "https://github.com/AeroMAPS/AeroSCOPE"
 
-[tool.poetry.group.test.dependencies]
-pytest = "^8.0"
-pytest-cov = "^5.0"
-coverage = { version = "^7.0", extras = ["toml"] }
-nbval = "^0.11"
-wrapt = "^1.16.0"
+[project.scripts]
+aeroscope = "aeroscope.app:main"
 
-[tool.poetry.group.doc.dependencies]
-sphinx = "^4.1.2"
-sphinx-rtd-theme = "^1.0"
-sphinxcontrib-bibtex = "^2.3.0"
+[dependency-groups]
+test = [
+    "pytest>=8.0,<9",
+    "pytest-cov>=5.0,<6",
+    "coverage[toml]>=7.0,<8",
+    "nbval>=0.11,<0.12",
+    "wrapt>=1.16.0,<2",
+]
+doc = [
+    "sphinx>=4.1.2,<5",
+    "sphinx-rtd-theme>=1.0,<2",
+    "sphinxcontrib-bibtex>=2.3.0,<3",
+]
+lint = [
+    "pre-commit>=3.5.0,<4",
+    "nbstripout>=0.6.0,<0.7",
+    "ruff==0.5.4",
+]
 
-[tool.poetry.group.lint.dependencies]
-pre-commit = "^3.5.0"
-nbstripout = "^0.6.0"
-ruff = "0.5.4"
+[tool.uv]
+default-groups = "all"
+cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+]
 
-[tool.poetry.scripts]
-    aeroscope = "aeroscope.app:main"
+# Packaging system =============================================================
+[build-system]
+requires = [
+    "setuptools",
+    "setuptools_scm[toml]",
+]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
-style = "semver"
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["aeroscope*"]
+
+[tool.setuptools_scm]
 
 [tool.ruff]
 line-length = 100
